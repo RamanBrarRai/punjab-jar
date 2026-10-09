@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     'Small-batch Punjabi achaar with full-volume flavour: sun-cured, hand-cut and slow-matured in cold-pressed mustard oil. Shipped across India.',
   generator: 'v0.app',
   icons: {
-    icon: [{ url: '/logo-icon.png', type: 'image/png' }],
-    apple: '/logo-apple-icon.png',
+    icon: [{ url: '/favicon.png', type: 'image/png' }],
+    apple: '/favicon.png',
   },
 }
 
