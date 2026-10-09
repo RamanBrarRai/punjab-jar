@@ -22,12 +22,8 @@ export const metadata: Metadata = {
     'Small-batch Punjabi achaar made the way our nanis taught us: sun-cured, hand-cut, slow-matured in cold-pressed mustard oil.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-icon.png',
+    icon: [{ url: '/logo-icon.png', type: 'image/png' }],
+    apple: '/logo-apple-icon.png',
   },
 }
 
