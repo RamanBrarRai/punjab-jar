@@ -1,3 +1,24 @@
+export type Tone = 'pink' | 'marigold' | 'emerald'
+
+export const toneStyles: Record<Tone, { bg: string; text: string; soft: string }> = {
+  pink: { bg: 'bg-pink', text: 'text-white', soft: 'bg-pink/15' },
+  marigold: { bg: 'bg-marigold', text: 'text-ink', soft: 'bg-marigold/20' },
+  emerald: { bg: 'bg-emerald', text: 'text-cream', soft: 'bg-emerald/15' },
+}
+
+const toneById: Record<string, Tone> = {
+  mango: 'marigold',
+  lemon: 'emerald',
+  mixed: 'pink',
+  chilli: 'emerald',
+  amla: 'pink',
+  carrot: 'marigold',
+}
+
+export function toneFor(id: string): Tone {
+  return toneById[id] ?? 'pink'
+}
+
 export type Pickle = {
   id: string
   name: string

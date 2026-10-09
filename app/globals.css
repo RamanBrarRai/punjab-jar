@@ -6,13 +6,13 @@
 
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
 
-  --color-forest: #0f4a3f;
-  --color-pink: #e91e63;
-  --color-mustard: #f5c518;
-  --color-cream: #fbf7ee;
-  --color-ink: #1a2e29;
+  --color-ink: #1b0b12;
+  --color-cream: #fff4e0;
+  --color-pink: #ff2d87;
+  --color-marigold: #ffb300;
+  --color-emerald: #0e5e3a;
 
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -40,7 +40,13 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  --animate-marquee: marquee 40s linear infinite;
+  --shadow-pop: 6px 6px 0 0 var(--color-ink);
+  --shadow-pop-sm: 3px 3px 0 0 var(--color-ink);
+  --shadow-pop-lg: 10px 10px 0 0 var(--color-ink);
+
+  --animate-marquee: marquee 35s linear infinite;
+  --animate-spin-slow: spin 18s linear infinite;
+  --animate-wiggle: wiggle 3s ease-in-out infinite;
 
   @keyframes marquee {
     from {
@@ -50,29 +56,39 @@
       transform: translateX(-50%);
     }
   }
+
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-6deg);
+    }
+    50% {
+      transform: rotate(6deg);
+    }
+  }
 }
 
 :root {
   color-scheme: light;
-  --background: #fbf7ee;
-  --foreground: #1a2e29;
+  --background: #fff4e0;
+  --foreground: #1b0b12;
   --card: #ffffff;
-  --card-foreground: #1a2e29;
-  --popover: #fbf7ee;
-  --popover-foreground: #1a2e29;
-  --primary: #0f4a3f;
-  --primary-foreground: #fbf7ee;
-  --secondary: #f5c518;
-  --secondary-foreground: #1a2e29;
-  --muted: #f1ead9;
-  --muted-foreground: #4f5f5a;
-  --accent: #e91e63;
-  --accent-foreground: #ffffff;
+  --card-foreground: #1b0b12;
+  --popover: #fff4e0;
+  --popover-foreground: #1b0b12;
+  --primary: #ff2d87;
+  --primary-foreground: #ffffff;
+  --secondary: #ffb300;
+  --secondary-foreground: #1b0b12;
+  --muted: #fbe6c2;
+  --muted-foreground: #5a4249;
+  --accent: #0e5e3a;
+  --accent-foreground: #fff4e0;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #e4dcc8;
-  --input: #e4dcc8;
-  --ring: #e91e63;
-  --radius: 0.5rem;
+  --border: #1b0b12;
+  --input: #1b0b12;
+  --ring: #ff2d87;
+  --radius: 1rem;
 }
 
 @layer base {
@@ -85,10 +101,43 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+}
+
+@utility zigzag {
+  --zz-a: var(--color-pink);
+  --zz-b: var(--color-marigold);
+  background:
+    linear-gradient(135deg, var(--zz-a) 25%, transparent 25%) -12px 0,
+    linear-gradient(225deg, var(--zz-a) 25%, transparent 25%) -12px 0,
+    linear-gradient(315deg, var(--zz-a) 25%, transparent 25%),
+    linear-gradient(45deg, var(--zz-a) 25%, transparent 25%);
+  background-size: 24px 24px;
+  background-color: var(--zz-b);
+}
+
+@utility phulkari {
+  --pk-a: rgb(255 255 255 / 0.08);
+  background-image:
+    linear-gradient(45deg, var(--pk-a) 25%, transparent 25%, transparent 75%, var(--pk-a) 75%),
+    linear-gradient(-45deg, var(--pk-a) 25%, transparent 25%, transparent 75%, var(--pk-a) 75%);
+  background-size: 36px 36px;
+}
+
+@utility text-outline {
+  -webkit-text-stroke: 2px currentColor;
+  color: transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
+  .animate-marquee,
+  .animate-spin-slow,
+  .animate-wiggle {
     animation: none;
   }
 }

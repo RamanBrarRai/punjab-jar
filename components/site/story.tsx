@@ -1,49 +1,73 @@
 import Image from 'next/image'
+import { SectionHeading } from './section-heading'
+import { SpinSticker } from './spin-sticker'
+
+const stats = [
+  { value: '3', label: 'Generations' },
+  { value: '21', label: 'Days in the sun' },
+  { value: '0', label: 'Preservatives' },
+]
 
 export function Story() {
   return (
-    <section id="story" className="bg-cream py-20 md:py-32">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 md:grid-cols-12 md:gap-16 md:px-8">
-        <figure className="md:col-span-6">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
+    <section id="story" className="relative scroll-mt-24 overflow-hidden bg-cream py-24 md:py-32">
+      <p
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-10 top-10 select-none font-display text-[8rem] font-extrabold uppercase leading-none tracking-tighter text-marigold/30 md:text-[14rem]"
+      >
+        Pind
+      </p>
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-5 md:px-8 lg:grid-cols-2">
+        <div className="relative mx-auto w-full max-w-md lg:mx-0">
+          <div className="absolute inset-0 -rotate-3 rounded-[2.5rem] border-2 border-ink bg-emerald" aria-hidden="true" />
+          <div className="relative aspect-[4/5] rotate-2 overflow-hidden rounded-[2.5rem] border-2 border-ink">
             <Image
               src="/images/story.png"
-              alt="Hands mixing sliced raw mangoes with spices in a brass bowl in a sunlit courtyard"
+              alt="Hands preparing achaar in a Punjabi home kitchen"
               fill
-              sizes="(min-width: 768px) 50vw, 100vw"
+              sizes="(min-width: 1024px) 448px, 90vw"
               className="object-cover"
             />
           </div>
-          <figcaption className="mt-4 font-serif text-sm italic text-ink/60">
-            Biji at work in the courtyard, Amritsar, summer 1994.
-          </figcaption>
-        </figure>
+          <SpinSticker
+            text="Since 1987 • Nani's recipe • Since 1987 • "
+            center="♥"
+            className="absolute -bottom-8 -right-4 bg-marigold text-ink md:-right-10"
+          />
+        </div>
 
-        <div className="md:col-span-6">
-          <p className="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.3em] text-pink">
-            <span aria-hidden="true" className="h-px w-10 bg-pink" />
-            Our Story
-          </p>
-          <h2 className="mt-5 text-balance font-serif text-4xl font-medium leading-[1.05] tracking-tight text-forest md:text-6xl">
-            It started with Biji&apos;s <em className="italic text-pink">brass bowl</em>.
-          </h2>
-          <div className="mt-8 space-y-5 text-pretty text-lg leading-relaxed text-ink/75">
+        <div>
+          <SectionHeading
+            eyebrow="Saadi kahani"
+            title={
+              <>
+                It started with <span className="text-pink">Nani&apos;s</span> rooftop.
+              </>
+            }
+          />
+          <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink/75">
             <p>
-              Every May, our grandmother would climb to the rooftop with a basket of raw mangoes, a sack of
-              spices and the same dented brass bowl she brought with her as a bride. By June, the whole
-              mohalla knew whose house the achaar was coming from.
+              Every summer, our Nani lined the terrace in Hoshiarpur with jars of mango, lemon and chilli, turning them
+              each morning to catch the sun. The whole mohalla knew when her achaar was ready.
             </p>
             <p>
-              Jar Of Punjab is our way of keeping that rooftop alive. Same recipes, same oil, same patience
-              — just a few more jars, so her achaar can reach your table too.
+              We still use her hand-written recipes, her stone-ground masalas and her stubborn refusal to rush things.
+              We just made the volume louder — and the jars easier to ship.
             </p>
           </div>
-          <blockquote className="mt-10 border-l-2 border-mustard pl-6">
-            <p className="font-serif text-2xl italic leading-snug text-forest">
-              &ldquo;Achaar is not made, puttar. It is waited for.&rdquo;
-            </p>
-            <footer className="mt-3 text-sm uppercase tracking-[0.2em] text-ink/55">— Biji, 1932–2019</footer>
-          </blockquote>
+
+          <dl className="mt-10 grid grid-cols-3 gap-4">
+            {stats.map((s) => (
+              <div key={s.label} className="rounded-2xl border-2 border-ink bg-white p-4 text-center shadow-pop-sm">
+                <dt className="sr-only">{s.label}</dt>
+                <dd>
+                  <span className="block font-display text-4xl font-extrabold text-pink md:text-5xl">{s.value}</span>
+                  <span className="mt-1 block text-xs font-bold uppercase tracking-wider text-ink/70">{s.label}</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>

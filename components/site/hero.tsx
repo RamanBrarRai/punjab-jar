@@ -1,73 +1,104 @@
 import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
+import { ArrowDownRight, Flame, Leaf, Star, Truck } from 'lucide-react'
+import { SpinSticker } from './spin-sticker'
+
+const perks = [
+  { icon: Leaf, label: 'Zero preservatives' },
+  { icon: Flame, label: 'Sun-cured 21 days' },
+  { icon: Truck, label: 'Ships all-India' },
+]
 
 export function Hero() {
   return (
-    <section
-      id="top"
-      className="relative overflow-hidden bg-forest text-cream md:min-h-[calc(100svh-5rem)]"
-    >
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 md:grid-cols-12 md:gap-8 md:px-8 md:py-24">
-        <div className="md:col-span-6 lg:col-span-6">
-          <p className="mb-6 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.3em] text-mustard">
-            <span aria-hidden="true" className="h-px w-10 bg-mustard" />
-            Small-batch · Since 1987 · Amritsar
+    <section id="top" className="relative -mt-24 overflow-hidden bg-marigold pt-28 md:-mt-28 md:pt-36">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 md:px-8 md:pb-24 lg:grid-cols-[1.1fr_1fr]">
+        <div>
+          <p className="inline-flex -rotate-2 items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-ink shadow-pop-sm">
+            <span className="size-2 rounded-full bg-pink" aria-hidden="true" />
+            Handmade in Hoshiarpur
           </p>
-          <h1 className="text-balance font-serif text-5xl font-medium leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl xl:text-8xl">
-            Punjab, Packed in <em className="font-normal italic text-mustard">Every</em> Jar.
+
+          <h1 className="mt-7 text-[clamp(3.25rem,9vw,7.5rem)] font-extrabold leading-[0.88] tracking-tight text-ink">
+            Achaar
+            <br />
+            with full
+            <br />
+            <span className="relative inline-block">
+              <span className="relative z-10 text-pink">volume.</span>
+              <span
+                aria-hidden="true"
+                className="absolute -bottom-1 left-0 right-0 h-4 -rotate-1 rounded-full bg-cream md:h-6"
+              />
+            </span>
           </h1>
-          <p className="mt-8 max-w-md text-pretty text-lg leading-relaxed text-cream/75">
-            Sun-cured, hand-cut achaar made the way our nanis taught us — slow-matured in cold-pressed
-            mustard oil, with no vinegar, no preservatives and no shortcuts.
+
+          <p className="mt-8 max-w-md text-lg leading-relaxed text-ink/80 text-pretty">
+            Nani&apos;s recipes, turned all the way up. Sun-cured, hand-cut and slow-matured in cold-pressed
+            mustard oil — loud, proud and Punjabi to the core.
           </p>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+
+          <div className="mt-9 flex flex-wrap items-center gap-4">
             <a
               href="#shop"
-              className="group inline-flex h-14 items-center gap-3 rounded-full bg-pink px-8 text-sm font-semibold uppercase tracking-wider text-white transition-transform hover:-translate-y-0.5"
+              className="group inline-flex h-14 items-center gap-3 rounded-full border-2 border-ink bg-pink px-7 font-bold text-white shadow-pop transition-all hover:-translate-y-0.5 hover:shadow-pop-lg"
             >
-              Shop the Jars
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              Shop the jars
+              <ArrowDownRight
+                className="size-5 transition-transform group-hover:rotate-[-45deg]"
+                aria-hidden="true"
+              />
             </a>
             <a
-              href="#story"
-              className="inline-flex h-14 items-center px-2 text-sm font-medium text-cream underline decoration-mustard decoration-2 underline-offset-8 hover:text-mustard"
+              href="#flavours"
+              className="inline-flex h-14 items-center rounded-full border-2 border-ink bg-cream px-7 font-bold text-ink transition-colors hover:bg-ink hover:text-cream"
             >
-              Read our story
+              Find your flavour
             </a>
           </div>
 
-          <dl className="mt-14 grid max-w-md grid-cols-3 gap-6 border-t border-cream/15 pt-8">
-            {[
-              ['21', 'days sun-cured'],
-              ['0', 'preservatives'],
-              ['40k+', 'happy homes'],
-            ].map(([value, label]) => (
-              <div key={label}>
-                <dt className="sr-only">{label}</dt>
-                <dd className="font-serif text-3xl text-mustard">{value}</dd>
-                <dd className="mt-1 text-xs uppercase tracking-wider text-cream/60">{label}</dd>
-              </div>
+          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3">
+            {perks.map(({ icon: Icon, label }) => (
+              <li key={label} className="flex items-center gap-2 text-sm font-semibold text-ink">
+                <Icon className="size-4 text-pink" aria-hidden="true" />
+                {label}
+              </li>
             ))}
-          </dl>
+          </ul>
         </div>
 
-        <div className="relative md:col-span-6 lg:col-span-6">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-full">
+        <div className="relative mx-auto w-full max-w-lg">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 translate-x-4 translate-y-4 rounded-t-full rounded-b-[2.5rem] border-2 border-ink bg-pink"
+          />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2.5rem] border-2 border-ink bg-cream">
             <Image
-              src="/images/hero-jars.png"
-              alt="Three jars of homemade Punjabi mango, lemon and mixed pickle surrounded by whole spices"
+              src="/images/hero-vibrant.png"
+              alt="Three jars of Punjabi achaar on a hot pink phulkari cloth with marigolds and red chillies"
               fill
               priority
-              sizes="(min-width: 768px) 50vw, 100vw"
+              sizes="(min-width: 1024px) 512px, 90vw"
               className="object-cover"
             />
           </div>
-          <div className="absolute -bottom-4 -left-2 flex size-32 rotate-[-12deg] flex-col items-center justify-center rounded-full bg-mustard text-center text-forest shadow-xl md:-left-8 md:size-36">
-            <span className="font-serif text-3xl italic leading-none">100%</span>
-            <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em]">Handmade</span>
+
+          <SpinSticker
+            text="Small batch • No preservatives • Pure mustard oil • "
+            center={<Flame className="size-9 fill-marigold md:size-11" />}
+            className="absolute -left-4 top-10 md:-left-10"
+          />
+
+          <div className="absolute -bottom-5 right-2 rotate-3 rounded-2xl border-2 border-ink bg-emerald px-5 py-3 text-cream shadow-pop-sm md:-right-6">
+            <p className="flex items-center gap-1 font-display text-3xl font-extrabold leading-none">
+              4.9
+              <Star className="size-6 fill-marigold text-marigold" aria-label="stars" />
+            </p>
+            <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-cream/80">12k+ happy jars</p>
           </div>
         </div>
       </div>
+
+      <div aria-hidden="true" className="zigzag h-6 border-y-2 border-ink" />
     </section>
   )
 }

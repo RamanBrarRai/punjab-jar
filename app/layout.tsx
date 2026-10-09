@@ -1,12 +1,11 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Fraunces, Inter } from 'next/font/google'
+import { Bricolage_Grotesque, Inter } from 'next/font/google'
 import './globals.css'
 
-const fraunces = Fraunces({
+const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
-  variable: '--font-fraunces',
-  axes: ['opsz', 'SOFT'],
+  variable: '--font-bricolage',
   display: 'swap',
 })
 
@@ -17,9 +16,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Jar Of Punjab — Homemade Punjabi Pickles',
+  title: 'Jar Of Punjab — Loud, Proud Punjabi Achaar',
   description:
-    'Small-batch Punjabi achaar made the way our nanis taught us: sun-cured, hand-cut, slow-matured in cold-pressed mustard oil.',
+    'Small-batch Punjabi achaar with full-volume flavour: sun-cured, hand-cut and slow-matured in cold-pressed mustard oil. Shipped across India.',
   generator: 'v0.app',
   icons: {
     icon: [{ url: '/logo-icon.png', type: 'image/png' }],
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'light',
-  themeColor: '#0F4A3F',
+  themeColor: '#FF2D87',
 }
 
 export default function RootLayout({
@@ -38,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable} bg-background`}>
+    <html lang="en" className={`${bricolage.variable} ${inter.variable} bg-background`}>
       <body className="antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

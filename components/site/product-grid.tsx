@@ -1,59 +1,72 @@
 import Image from 'next/image'
-import { pickles, formatPrice } from '@/lib/pickles'
+import { formatPrice, pickles, toneFor, toneStyles } from '@/lib/pickles'
+import { cn } from '@/lib/utils'
 import { SectionHeading } from './section-heading'
+import { HeatMeter } from './heat-meter'
 import { AddToCartButton } from './add-to-cart-button'
 
 export function ProductGrid() {
   return (
-    <section id="shop" className="border-t border-ink/10 bg-cream py-20 md:py-32">
+    <section id="shop" className="scroll-mt-24 bg-cream py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading
-            eyebrow="The Pantry"
+            eyebrow="The collection"
             title={
               <>
-                Shop the <em className="italic text-pink">collection</em>
+                Stock up the <span className="text-pink">pantry.</span>
               </>
             }
+            description="Every jar is cut, cured and packed by hand — in batches small enough to taste each one."
           />
-          <p className="max-w-xs text-sm leading-relaxed text-ink/65">
-            Packed in reusable glass, sealed by hand, shipped within 48 hours of bottling.
+          <p className="shrink-0 rotate-2 self-start rounded-2xl border-2 border-ink bg-emerald px-5 py-3 font-display text-lg font-bold text-cream shadow-pop-sm md:self-end">
+            Free shipping over ₹999
           </p>
         </div>
 
-        <ul className="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-          {pickles.map((p, i) => (
-            <li key={p.id}>
-              <article className="group flex h-full flex-col">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-muted">
-                  <Image
-                    src={p.image}
-                    alt={`Jar of ${p.name.toLowerCase()} pickle`}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+        <ul className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {pickles.map((p) => {
+            const tone = toneStyles[toneFor(p.id)]
+            return (
+              <li
+                key={p.id}
+                className="group flex flex-col overflow-hidden rounded-[2rem] border-2 border-ink bg-white shadow-pop transition-all duration-300 hover:-translate-y-1.5 hover:shadow-pop-lg"
+              >
+                <div className={cn('relative border-b-2 border-ink p-5', tone.bg)}>
+                  <div className="relative aspect-square overflow-hidden rounded-[1.5rem] border-2 border-ink">
+                    <Image
+                      src={p.image}
+                      alt={`A jar of ${p.name.toLowerCase()} achaar`}
+                      fill
+                      sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
                   {p.badge && (
-                    <span className="absolute left-4 top-4 rounded-full bg-mustard px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-forest">
+                    <span className="absolute left-3 top-3 -rotate-6 rounded-full border-2 border-ink bg-cream px-3 py-1 text-xs font-bold uppercase tracking-wider text-ink">
                       {p.badge}
                     </span>
                   )}
-                  <span className="absolute right-4 top-4 font-serif text-sm italic text-ink/70">
-                    No. 0{i + 1}
-                  </span>
                 </div>
-                <div className="mt-6 flex items-baseline justify-between gap-4 border-b border-ink/10 pb-4">
-                  <h3 className="font-serif text-2xl text-forest">{p.name} Achaar</h3>
-                  <p className="font-serif text-xl text-ink">{formatPrice(p.price)}</p>
+
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-pink">{p.punjabi}</p>
+                      <h3 className="mt-1 text-3xl font-extrabold tracking-tight text-ink">{p.name}</h3>
+                    </div>
+                    <p className="text-right">
+                      <span className="block font-display text-2xl font-extrabold text-ink">{formatPrice(p.price)}</span>
+                      <span className="text-xs font-semibold text-ink/60">{p.weight}</span>
+                    </p>
+                  </div>
+                  <p className="mt-3 flex-1 leading-relaxed text-ink/70">{p.tagline}</p>
+                  <HeatMeter heat={p.heat} className="mt-4 text-ink" />
+                  <AddToCartButton name={p.name} />
                 </div>
-                <p className="mt-4 text-sm leading-relaxed text-ink/65">
-                  {p.punjabi} · {p.weight}
-                </p>
-                <p className="mt-2 flex-1 font-serif text-lg italic text-ink/80">{p.tagline}</p>
-                <AddToCartButton name={p.name} />
-              </article>
-            </li>
-          ))}
+              </li>
+            )
+          })}
         </ul>
       </div>
     </section>

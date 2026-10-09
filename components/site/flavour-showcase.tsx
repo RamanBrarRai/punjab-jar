@@ -1,139 +1,112 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
-import { Flame } from 'lucide-react'
-import { pickles, formatPrice } from '@/lib/pickles'
-import { useCart } from '@/components/cart-context'
+import { Utensils } from 'lucide-react'
+import { formatPrice, pickles, toneFor, toneStyles } from '@/lib/pickles'
 import { cn } from '@/lib/utils'
 import { SectionHeading } from './section-heading'
+import { HeatMeter } from './heat-meter'
+import { AddToCartButton } from './add-to-cart-button'
 
 export function FlavourShowcase() {
-  const [active, setActive] = useState(0)
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
-  const { add } = useCart()
-  const pickle = pickles[active]
-
-  function onKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
-    let next = active
-    if (e.key === 'ArrowRight') next = (active + 1) % pickles.length
-    else if (e.key === 'ArrowLeft') next = (active - 1 + pickles.length) % pickles.length
-    else if (e.key === 'Home') next = 0
-    else if (e.key === 'End') next = pickles.length - 1
-    else return
-    e.preventDefault()
-    setActive(next)
-    tabRefs.current[next]?.focus()
-  }
+  const [activeId, setActiveId] = useState(pickles[0].id)
+  const active = pickles.find((p) => p.id === activeId) ?? pickles[0]
+  const tone = toneStyles[toneFor(active.id)]
 
   return (
-    <section id="flavours" className="bg-cream py-20 md:py-32">
+    <section id="flavours" className="phulkari relative scroll-mt-24 bg-ink py-24 text-cream md:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
-          eyebrow="The Flavour Library"
+          tone="light"
+          eyebrow="Pick your vibe"
           title={
             <>
-              Six jars. Six <em className="italic text-pink">stories</em>.
+              Six jars. <span className="text-marigold">One Punjabi soul.</span>
             </>
           }
-          description="Every recipe comes from a different kitchen in our family. Pick one and taste where it came from."
+          description="Tangy, fiery, sweet-sour or all of the above. Tap a flavour to meet it properly."
         />
 
-        <div
-          role="tablist"
-          aria-label="Pickle flavours"
-          onKeyDown={onKeyDown}
-          className="-mx-5 mt-12 flex gap-2 overflow-x-auto px-5 pb-2 md:mx-0 md:flex-wrap md:px-0"
-        >
-          {pickles.map((p, i) => (
-            <button
-              key={p.id}
-              ref={(el) => {
-                tabRefs.current[i] = el
-              }}
-              role="tab"
-              id={`tab-${p.id}`}
-              aria-selected={i === active}
-              aria-controls={`panel-${p.id}`}
-              tabIndex={i === active ? 0 : -1}
-              onClick={() => setActive(i)}
-              className={cn(
-                'shrink-0 rounded-full border px-6 py-3 font-serif text-lg transition-colors',
-                i === active
-                  ? 'border-forest bg-forest text-cream'
-                  : 'border-ink/15 text-ink hover:border-forest hover:text-forest',
-              )}
-            >
-              {p.name}
-            </button>
-          ))}
+        <div role="tablist" aria-label="Flavours" className="mt-12 flex flex-wrap gap-3">
+          {pickles.map((p) => {
+            const selected = p.id === activeId
+            const t = toneStyles[toneFor(p.id)]
+            return (
+              <button
+                key={p.id}
+                type="button"
+                role="tab"
+                id={`tab-${p.id}`}
+                aria-selected={selected}
+                aria-controls="flavour-panel"
+                onClick={() => setActiveId(p.id)}
+                className={cn(
+                  'rounded-full border-2 px-5 py-2.5 font-display text-lg font-bold transition-all',
+                  selected
+                    ? cn(t.bg, t.text, 'border-cream -translate-y-1 shadow-[4px_4px_0_0_var(--color-cream)]')
+                    : 'border-cream/30 text-cream hover:border-cream',
+                )}
+              >
+                {p.name}
+              </button>
+            )
+          })}
         </div>
 
         <div
-          key={pickle.id}
+          id="flavour-panel"
           role="tabpanel"
-          id={`panel-${pickle.id}`}
-          aria-labelledby={`tab-${pickle.id}`}
-          className="mt-10 grid animate-in fade-in items-center gap-10 duration-500 md:grid-cols-2 md:gap-16"
+          aria-labelledby={`tab-${active.id}`}
+          className="mt-10 grid items-center gap-10 rounded-[2.5rem] border-2 border-cream bg-cream p-5 text-ink md:p-8 lg:grid-cols-2 lg:gap-14 lg:p-12"
         >
-          <div className="relative aspect-square overflow-hidden rounded-2xl bg-muted">
-            <Image
-              src={pickle.image}
-              alt={`Jar of ${pickle.name.toLowerCase()} pickle`}
-              fill
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover"
-            />
-            <span className="absolute left-5 top-5 rounded-full bg-cream px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-forest">
-              No. 0{active + 1}
-            </span>
+          <div className="relative">
+            <div className={cn('absolute inset-0 rotate-3 rounded-[2rem] border-2 border-ink', tone.bg)} aria-hidden="true" />
+            <div className="relative aspect-square overflow-hidden rounded-[2rem] border-2 border-ink">
+              <Image
+                key={active.id}
+                src={active.image}
+                alt={`A jar of ${active.name.toLowerCase()} achaar`}
+                fill
+                sizes="(min-width: 1024px) 520px, 90vw"
+                className="animate-in fade-in zoom-in-95 object-cover duration-500"
+              />
+            </div>
+            {active.badge && (
+              <span className="absolute -right-2 -top-3 rotate-6 rounded-full border-2 border-ink bg-marigold px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-ink shadow-pop-sm">
+                {active.badge}
+              </span>
+            )}
           </div>
 
-          <div>
-            <p className="text-sm font-medium uppercase tracking-[0.25em] text-pink">{pickle.punjabi}</p>
-            <h3 className="mt-4 text-balance font-serif text-4xl leading-tight text-forest md:text-6xl">
-              {pickle.tagline}
+          <div key={active.id} className="animate-in fade-in slide-in-from-bottom-2 duration-500">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-pink">{active.punjabi}</p>
+            <h3 className="mt-2 text-5xl font-extrabold leading-none tracking-tight md:text-6xl">
+              {active.name} Achaar
             </h3>
-            <p className="mt-6 max-w-lg text-pretty text-lg leading-relaxed text-ink/75">{pickle.description}</p>
+            <p className="mt-4 font-display text-2xl font-semibold text-ink/80">{active.tagline}</p>
+            <p className="mt-5 leading-relaxed text-ink/75">{active.description}</p>
 
-            <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-ink/10 pt-8">
-              <div>
-                <dt className="text-xs uppercase tracking-[0.2em] text-ink/55">Heat</dt>
-                <dd className="mt-2 flex gap-1" aria-label={`${pickle.heat} out of 3`}>
-                  {[1, 2, 3].map((n) => (
-                    <Flame
-                      key={n}
-                      aria-hidden="true"
-                      className={cn('size-5', n <= pickle.heat ? 'fill-pink text-pink' : 'text-ink/20')}
-                    />
-                  ))}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-[0.2em] text-ink/55">Best with</dt>
-                <dd className="mt-2 font-serif text-lg text-ink">{pickle.pairing}</dd>
-              </div>
-              <div className="col-span-2">
-                <dt className="text-xs uppercase tracking-[0.2em] text-ink/55">Tasting notes</dt>
-                <dd className="mt-3 flex flex-wrap gap-2">
-                  {pickle.notes.map((note) => (
-                    <span key={note} className="rounded-full bg-mustard/30 px-4 py-1.5 text-sm font-medium text-forest">
-                      {note}
-                    </span>
-                  ))}
-                </dd>
-              </div>
-            </dl>
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              <HeatMeter heat={active.heat} className="rounded-full border-2 border-ink px-3 py-1.5" />
+              {active.notes.map((note) => (
+                <span key={note} className={cn('rounded-full border-2 border-ink px-3 py-1.5 text-sm font-semibold', tone.soft)}>
+                  {note}
+                </span>
+              ))}
+            </div>
 
-            <div className="mt-10 flex flex-wrap items-center gap-6">
-              <button
-                type="button"
-                onClick={add}
-                className="inline-flex h-14 items-center rounded-full bg-pink px-8 text-sm font-semibold uppercase tracking-wider text-white transition-transform hover:-translate-y-0.5"
-              >
-                Add to cart · {formatPrice(pickle.price)}
-              </button>
-              <span className="text-sm text-ink/60">{pickle.weight} glass jar</span>
+            <p className="mt-6 flex items-center gap-2 text-sm font-semibold">
+              <Utensils className="size-4 text-pink" aria-hidden="true" />
+              Best with: <span className="font-normal text-ink/75">{active.pairing}</span>
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-5 border-t-2 border-dashed border-ink/25 pt-7">
+              <p>
+                <span className="font-display text-4xl font-extrabold">{formatPrice(active.price)}</span>
+                <span className="ml-2 text-sm font-semibold text-ink/60">/ {active.weight}</span>
+              </p>
+              <AddToCartButton name={active.name} className="mt-0 flex-1 sm:flex-none" />
             </div>
           </div>
         </div>

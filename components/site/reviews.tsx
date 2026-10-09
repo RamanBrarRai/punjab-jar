@@ -1,79 +1,74 @@
 import { Star } from 'lucide-react'
+import { cn } from '@/lib/utils'
 import { SectionHeading } from './section-heading'
 
 const reviews = [
   {
-    quote:
-      'I opened the mango jar and was instantly back in my nani’s kitchen in Jalandhar. I didn’t think anyone still made achaar like this.',
-    name: 'Harpreet K.',
-    place: 'Toronto',
-    jar: 'Mango Achaar',
+    quote: 'Opened the mango jar and my mom asked who made it. Tastes exactly like the one from her pind.',
+    name: 'Harleen K.',
+    city: 'Toronto',
+    className: 'bg-white -rotate-2',
   },
   {
-    quote:
-      'The green chilli is properly fiery but there’s so much flavour behind the heat. We go through a jar every two weeks.',
+    quote: 'The chilli one is dangerous. I finished a whole jar with two parathas. No regrets.',
     name: 'Arjun M.',
-    place: 'Bengaluru',
-    jar: 'Chilli Achaar',
+    city: 'Bengaluru',
+    className: 'bg-pink text-white rotate-1',
   },
   {
-    quote:
-      'You can taste the mustard oil and the sun in every bite. Gifted the mixed jar to my in-laws — they asked for the recipe.',
+    quote: 'Finally an achaar that tastes like mustard oil should. The gajar is crunchy even after weeks.',
     name: 'Simran S.',
-    place: 'London',
-    jar: 'Mixed Achaar',
+    city: 'Ludhiana',
+    className: 'bg-emerald text-cream -rotate-1',
+  },
+  {
+    quote: 'Gifted the mixed jar to my in-laws. I am now the favourite. Thank you, Jar Of Punjab.',
+    name: 'Rohan D.',
+    city: 'Mumbai',
+    className: 'bg-white rotate-2',
   },
 ]
 
 export function Reviews() {
   return (
-    <section id="reviews" className="bg-forest py-20 text-cream md:py-32">
+    <section id="reviews" className="scroll-mt-24 border-y-2 border-ink bg-marigold py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading
-            inverted
-            eyebrow="Kind Words"
+            eyebrow="Love letters"
             title={
               <>
-                From <em className="italic text-mustard">our</em> table to yours.
+                Approved by <span className="text-pink">every</span> Bibi-ji.
               </>
             }
           />
-          <div className="flex items-center gap-4">
-            <span className="font-serif text-6xl text-mustard">4.9</span>
-            <div>
-              <div className="flex gap-0.5" aria-hidden="true">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="size-4 fill-mustard text-mustard" />
-                ))}
-              </div>
-              <p className="mt-1 text-sm text-cream/65">from 3,200+ reviews</p>
-            </div>
+          <div className="flex items-center gap-3 self-start rounded-full border-2 border-ink bg-cream px-5 py-3 shadow-pop-sm md:self-end">
+            <span className="flex" aria-hidden="true">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="size-5 fill-pink text-pink" />
+              ))}
+            </span>
+            <span className="font-display font-bold text-ink">4.9 from 2,400+ reviews</span>
           </div>
         </div>
 
-        <ul className="mt-16 grid gap-6 md:grid-cols-3">
+        <ul className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {reviews.map((r) => (
-            <li key={r.name}>
-              <figure className="flex h-full flex-col rounded-2xl border border-cream/15 bg-cream/[0.04] p-8">
-                <div className="flex gap-0.5" role="img" aria-label="5 out of 5 stars">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="size-4 fill-pink text-pink" aria-hidden="true" />
-                  ))}
-                </div>
-                <blockquote className="mt-6 flex-1 font-serif text-xl leading-relaxed text-cream">
-                  &ldquo;{r.quote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-8 flex items-center justify-between border-t border-cream/15 pt-6">
-                  <span>
-                    <span className="block font-medium">{r.name}</span>
-                    <span className="text-sm text-cream/60">{r.place}</span>
-                  </span>
-                  <span className="rounded-full bg-mustard px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-forest">
-                    {r.jar}
-                  </span>
-                </figcaption>
-              </figure>
+            <li
+              key={r.name}
+              className={cn(
+                'flex flex-col rounded-[2rem] border-2 border-ink p-7 text-ink shadow-pop transition-transform duration-300 hover:rotate-0',
+                r.className,
+              )}
+            >
+              <span aria-hidden="true" className="font-display text-7xl font-extrabold leading-[0.6] opacity-40">
+                &ldquo;
+              </span>
+              <blockquote className="mt-4 flex-1 font-display text-xl font-semibold leading-snug">{r.quote}</blockquote>
+              <p className="mt-6 border-t-2 border-dashed border-current/30 pt-4 text-sm">
+                <span className="font-bold">{r.name}</span>
+                <span className="opacity-70"> — {r.city}</span>
+              </p>
             </li>
           ))}
         </ul>

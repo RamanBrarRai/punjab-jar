@@ -3,39 +3,48 @@ import { ArrowRight } from 'lucide-react'
 
 export function ClosingCta() {
   return (
-    <section className="bg-cream pt-20 md:pt-32">
-      <div className="mx-auto max-w-4xl px-5 text-center md:px-8">
-        <p className="text-xs font-medium uppercase tracking-[0.3em] text-pink">Ghar di yaad, har jar vich</p>
-        <h2 className="mt-6 text-balance font-serif text-5xl font-medium leading-[1.02] tracking-tight text-forest md:text-7xl">
-          Bring a little <em className="italic text-pink">Punjab</em> home.
-        </h2>
-        <p className="mx-auto mt-6 max-w-xl text-pretty text-lg leading-relaxed text-ink/70">
-          Try the Tasting Trio — three 150g jars of our most-loved achaar. Free shipping across India.
-        </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="#shop"
-            className="group inline-flex h-14 items-center gap-3 rounded-full bg-pink px-8 text-sm font-semibold uppercase tracking-wider text-white transition-transform hover:-translate-y-0.5"
-          >
-            Get the Tasting Trio
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-          </a>
-          <a
-            href="#flavours"
-            className="inline-flex h-14 items-center rounded-full border border-forest px-8 text-sm font-semibold uppercase tracking-wider text-forest transition-colors hover:bg-forest hover:text-cream"
-          >
-            Explore flavours
-          </a>
+    <section className="bg-cream px-3 py-16 md:px-6 md:py-24">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border-2 border-ink bg-pink shadow-pop-lg">
+        <div className="phulkari absolute inset-0" aria-hidden="true" />
+        <div className="relative grid items-center gap-10 p-8 md:p-14 lg:grid-cols-[1.2fr_1fr]">
+          <div>
+            <p className="inline-block rotate-[-3deg] rounded-full border-2 border-ink bg-marigold px-4 py-1 text-xs font-bold uppercase tracking-[0.2em] text-ink">
+              Your thali is waiting
+            </p>
+            <h2 className="mt-6 text-[clamp(3rem,8vw,6.5rem)] font-extrabold leading-[0.9] tracking-tight text-white">
+              Balle balle,
+              <br />
+              <span className="text-ink">bring it home.</span>
+            </h2>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-white/90">
+              Build your own box of three and get 15% off. Because one jar never lasts the week.
+            </p>
+            <a
+              href="#shop"
+              className="group mt-9 inline-flex h-14 items-center gap-3 rounded-full border-2 border-ink bg-marigold px-8 font-bold text-ink shadow-pop transition-all hover:-translate-y-0.5 hover:shadow-pop-lg"
+            >
+              Build my box
+              <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            </a>
+          </div>
+
+          <div className="relative mx-auto aspect-square w-full max-w-sm">
+            <div className="absolute inset-0 rotate-6 rounded-full border-2 border-ink bg-marigold" aria-hidden="true" />
+            <div className="relative size-full overflow-hidden rounded-full border-2 border-ink">
+              <Image
+                src="/images/lineup.png"
+                alt="A lineup of Jar Of Punjab achaar jars"
+                fill
+                sizes="(min-width: 1024px) 384px, 80vw"
+                className="object-cover"
+              />
+            </div>
+            <span className="absolute -left-2 top-6 flex size-24 -rotate-12 animate-wiggle flex-col items-center justify-center rounded-full border-2 border-ink bg-emerald text-center font-display font-extrabold leading-none text-cream">
+              <span className="text-3xl">15%</span>
+              <span className="text-xs uppercase tracking-wider">off</span>
+            </span>
+          </div>
         </div>
-      </div>
-      <div className="relative mx-auto mt-16 aspect-[21/9] max-w-7xl overflow-hidden md:mt-20 md:rounded-t-2xl">
-        <Image
-          src="/images/lineup.png"
-          alt="Six jars of Jar Of Punjab pickles lined up on a wooden shelf"
-          fill
-          sizes="(min-width: 1280px) 1280px, 100vw"
-          className="object-cover"
-        />
       </div>
     </section>
   )
