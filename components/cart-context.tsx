@@ -8,11 +8,12 @@ import {
   useMemo,
   useState,
 } from 'react'
-import type { Pickle } from '@/lib/pickles'
+import type { Pickle, Variant } from '@/lib/pickles'
 
 export type CartItem = {
-  id: string
-  pickle: Pickle
+  id: string          // unique per (productId + size) combo
+  product: Pickle
+  variant: Variant
   qty: number
 }
 
@@ -21,7 +22,7 @@ type CartContextValue = {
   count: number
   subtotal: number
   isOpen: boolean
-  add: (pickle: Pickle, qty?: number) => void
+  add: (product: Pickle, variant: Variant, qty?: number) => void
   remove: (id: string) => void
   updateQty: (id: string, qty: number) => void
   clear: () => void
@@ -31,14 +32,13 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null)
 
-const STORAGE_KEY = 'jop-cart-v1'
+const STORAGE_KEY = 'jop-cart-v2'   // bumped version — old carts will be cleared
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
   const [isOpen, setIsOpen] = useState(false)
   const [hydrated, setHydrated] = useState(false)
 
-  // Load from localStorage on mount
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
@@ -47,22 +47,20 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         if (Array.isArray(parsed)) setItems(parsed)
       }
     } catch {
-      // ignore corrupt storage
+      // ignore
     }
     setHydrated(true)
   }, [])
 
-  // Persist to localStorage whenever items change
   useEffect(() => {
     if (!hydrated) return
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
     } catch {
-      // ignore quota errors
+      // ignore
     }
   }, [items, hydrated])
 
-  // Lock body scroll when drawer is open
   useEffect(() => {
     if (isOpen) {
       const original = document.body.style.overflow
@@ -73,18 +71,22 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [isOpen])
 
-  const add = useCallback((pickle: Pickle, qty: number = 1) => {
-    setItems((prev) => {
-      const existing = prev.find((i) => i.id === pickle.id)
-      if (existing) {
-        return prev.map((i) =>
-          i.id === pickle.id ? { ...i, qty: i.qty + qty } : i
-        )
-      }
-      return [...prev, { id: pickle.id, pickle, qty }]
-    })
-    setIsOpen(true)
-  }, [])
+  const add = useCallback(
+    (product: Pickle, variant: Variant, qty: number = 1) => {
+      const key = `${product.id}__${variant.size}`
+      setItems((prev) => {
+        const existing = prev.find((i) => i.id === key)
+        if (existing) {
+          return prev.map((i) =>
+            i.id === key ? { ...i, qty: i.qty + qty } : i
+          )
+        }
+        return [...prev, { id: key, product, variant, qty }]
+      })
+      setIsOpen(true)
+    },
+    []
+  )
 
   const remove = useCallback((id: string) => {
     setItems((prev) => prev.filter((i) => i.id !== id))
@@ -108,7 +110,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   )
 
   const subtotal = useMemo(
-    () => items.reduce((sum, i) => sum + i.pickle.price * i.qty, 0),
+    () => items.reduce((sum, i) => sum + i.variant.price * i.qty, 0),
     [items]
   )
 

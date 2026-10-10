@@ -141,3 +141,63 @@
     animation: none;
   }
 }
+
+.phulkari {
+  background-color: #1a1a1a;
+  background-image:
+    linear-gradient(45deg, rgba(255,45,135,0.08) 25%, transparent 25%, transparent 75%, rgba(255,45,135,0.08) 75%),
+    linear-gradient(45deg, rgba(255,45,135,0.08) 25%, transparent 25%, transparent 75%, rgba(255,45,135,0.08) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+}
+
+/* ============================================================
+   FOOTER — Giant animated marquee
+   ============================================================ */
+.marquee-giant {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 0;
+  white-space: nowrap;
+  animation: marqueeGiant 40s linear infinite;
+  will-change: transform;
+}
+
+.marquee-giant__text {
+  font-family: var(--font-bricolage), 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: clamp(4rem, 14vw, 12rem);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  color: #FF2D87; /* pink */
+  flex-shrink: 0;
+}
+
+.marquee-giant__dot {
+  font-family: var(--font-bricolage), sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 10vw, 8rem);
+  line-height: 1;
+  color: #D6A62E; /* marigold */
+  flex-shrink: 0;
+}
+
+.marquee-giant:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeGiant {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-giant {
+    animation: none;
+  }
+}

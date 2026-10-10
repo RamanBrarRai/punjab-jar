@@ -1,10 +1,10 @@
 'use client'
 
+import Link from 'next/link'
 import { X, Trash2, Plus, Minus, ShoppingBag } from 'lucide-react'
 import { useCart } from '@/components/cart-context'
 import { formatPrice } from '@/lib/pickles'
 import { cn } from '@/lib/utils'
-import Link from 'next/link'
 
 export function CartDrawer() {
   const { items, isOpen, close, updateQty, remove, subtotal, count } = useCart()
@@ -16,7 +16,7 @@ export function CartDrawer() {
         aria-hidden="true"
         onClick={close}
         className={cn(
-          'fixed inset-0 z-40 bg-ink/40 backdrop-blur-sm transition-opacity duration-300',
+          'fixed inset-0 z-50 bg-ink/40 backdrop-blur-sm transition-opacity duration-300',
           isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
         )}
       />
@@ -81,12 +81,16 @@ export function CartDrawer() {
               >
                 {/* Image */}
                 <div className="flex size-20 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-ink bg-white">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={item.pickle.image}
-                    alt={item.pickle.name}
-                    className="size-full object-contain p-1"
-                  />
+                  {item.product.image.startsWith('/') ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={item.product.image}
+                      alt={item.product.name}
+                      className="size-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-4xl">{item.product.image}</span>
+                  )}
                 </div>
 
                 {/* Info */}
@@ -94,16 +98,16 @@ export function CartDrawer() {
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                       <p className="truncate font-display text-lg font-bold leading-tight text-ink">
-                        {item.pickle.name}
+                        {item.product.name}
                       </p>
                       <p className="truncate text-xs text-ink/60">
-                        {item.pickle.punjabi} · {item.pickle.weight}
+                        {item.product.punjabi} · {item.variant.size}
                       </p>
                     </div>
                     <button
                       type="button"
                       onClick={() => remove(item.id)}
-                      aria-label={`Remove ${item.pickle.name}`}
+                      aria-label={`Remove ${item.product.name}`}
                       className="flex-shrink-0 rounded-full p-1 text-ink/50 transition-colors hover:bg-pink/10 hover:text-pink"
                     >
                       <Trash2 className="size-4" aria-hidden="true" />
@@ -136,7 +140,7 @@ export function CartDrawer() {
 
                     {/* Line price */}
                     <p className="font-display text-lg font-bold text-ink">
-                      {formatPrice(item.pickle.price * item.qty)}
+                      {formatPrice(item.variant.price * item.qty)}
                     </p>
                   </div>
                 </div>
@@ -160,11 +164,11 @@ export function CartDrawer() {
               Shipping calculated at checkout. Free shipping over ₹999.
             </p>
             <Link
-                href="/checkout"
-                onClick={close}
-                className="inline-flex h-14 w-full items-center justify-center rounded-full border-2 border-ink bg-pink text-base font-bold uppercase tracking-wider text-white shadow-pop transition-transform hover:-translate-y-0.5"
+              href="/checkout"
+              onClick={close}
+              className="inline-flex h-14 w-full items-center justify-center rounded-full border-2 border-ink bg-pink text-base font-bold uppercase tracking-wider text-white shadow-pop transition-transform hover:-translate-y-0.5"
             >
-                Proceed to checkout
+              Proceed to checkout
             </Link>
           </footer>
         )}

@@ -3,6 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import { Bricolage_Grotesque, Inter } from 'next/font/google'
 import { CartProvider } from '@/components/cart-context'
 import { CartDrawer } from '@/components/site/cart-drawer'
+import { Navbar } from '@/components/site/navbar'
+import { Footer } from '@/components/site/footer'
 import './globals.css'
 
 const bricolage = Bricolage_Grotesque({
@@ -18,9 +20,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Jar Of Punjab — Loud, Proud Punjabi Achaar',
+  title: 'Jar Of Punjab — Loud, Proud Punjabi Achaar, Jams & Spices',
   description:
-    'Small-batch Punjabi achaar with full-volume flavour: sun-cured, hand-cut and slow-matured in cold-pressed mustard oil. Shipped across India.',
+    'Small-batch Punjabi achaar, handmade jams and stone-ground spices. Sun-cured, hand-cut and slow-matured in cold-pressed mustard oil. Shipped across India.',
   generator: 'v0.app',
   icons: {
     icon: [{ url: '/favicon.png', type: 'image/png' }],
@@ -39,10 +41,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${bricolage.variable} ${inter.variable} bg-background`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${bricolage.variable} ${inter.variable} bg-background`}>
       <body className="antialiased">
         <CartProvider>
-          {children}
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
           <CartDrawer />
         </CartProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}

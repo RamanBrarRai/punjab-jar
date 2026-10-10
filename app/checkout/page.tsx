@@ -231,11 +231,11 @@ export default function CheckoutPage() {
                     className="flex items-start justify-between gap-3 text-sm"
                   >
                     <span className="min-w-0 text-ink">
-                      {item.pickle.name}{' '}
-                      <span className="text-ink/50">× {item.qty}</span>
+                      {item.product.name}{' '}
+                      <span className="text-ink/50"> ({item.variant.size}) × {item.qty}</span>
                     </span>
                     <span className="flex-shrink-0 font-bold text-ink">
-                      {formatPrice(item.pickle.price * item.qty)}
+                      {formatPrice(item.variant.price * item.qty)}
                     </span>
                   </li>
                 ))}

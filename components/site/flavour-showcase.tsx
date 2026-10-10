@@ -3,15 +3,16 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { Utensils } from 'lucide-react'
-import { formatPrice, pickles, toneFor, toneStyles } from '@/lib/pickles'
+import { formatPrice, pickles, toneFor, toneStyles, productsByCategory } from '@/lib/pickles'
 import { cn } from '@/lib/utils'
 import { SectionHeading } from './section-heading'
 import { HeatMeter } from './heat-meter'
 import { AddToCartButton } from './add-to-cart-button'
 
 export function FlavourShowcase() {
-  const [activeId, setActiveId] = useState(pickles[0].id)
-  const active = pickles.find((p) => p.id === activeId) ?? pickles[0]
+  const pickleItems = productsByCategory('pickle')
+  const [activeId, setActiveId] = useState(pickleItems[0].id)
+  const active = pickleItems.find((p) => p.id === activeId) ?? pickleItems[0]
   const tone = toneStyles[toneFor(active.id)]
 
   return (
@@ -29,7 +30,7 @@ export function FlavourShowcase() {
         />
 
         <div role="tablist" aria-label="Flavours" className="mt-12 flex flex-wrap gap-3">
-          {pickles.map((p) => {
+          {pickleItems.map((p) => {
             const selected = p.id === activeId
             const t = toneStyles[toneFor(p.id)]
             return (
@@ -103,10 +104,23 @@ export function FlavourShowcase() {
 
             <div className="mt-8 flex flex-wrap items-center gap-5 border-t-2 border-dashed border-ink/25 pt-7">
               <p>
-                <span className="font-display text-4xl font-extrabold">{formatPrice(active.price)}</span>
-                <span className="ml-2 text-sm font-semibold text-ink/60">/ {active.weight}</span>
+                <span className="font-display text-4xl font-extrabold">
+                  {formatPrice(
+                    (active.variants.find((v) => v.size === active.defaultSize) ?? active.variants[0]).price
+                  )}
+                </span>
+                <span className="ml-2 text-sm font-semibold text-ink/60">
+                  / {(active.variants.find((v) => v.size === active.defaultSize) ?? active.variants[0]).size}
+                </span>
               </p>
-              <AddToCartButton pickle={active} className="mt-0 flex-1 sm:flex-none" />
+              <AddToCartButton
+                pickle={active}
+                variant={
+                  active.variants.find((v) => v.size === active.defaultSize) ??
+                  active.variants[0]
+                }
+                className="mt-0 flex-1 sm:flex-none"
+              />
             </div>
           </div>
         </div>
