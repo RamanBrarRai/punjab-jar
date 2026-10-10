@@ -4,6 +4,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, Bell, Sparkles } from 'lucide-react'
 
+export const dynamic = 'force-dynamic'
+
 const preview = [
   { emoji: '🥝', name: 'Kiwi Jam', note: 'Tart & green' },
   { emoji: '🍓', name: 'Strawberry Jam', note: 'The classic' },
