@@ -59,11 +59,9 @@ export function ProductCard({ product }: { product: Pickle }) {
         <p className="text-[10px] font-bold uppercase tracking-wider text-pink line-clamp-1">
           {product.punjabi}
         </p>
-        <Link href={`/product/${product.id}`}>
-          <h3 className="mt-1 font-display text-xl font-extrabold leading-tight text-ink md:text-2xl line-clamp-1">
-            {product.name}
-          </h3>
-        </Link>
+        <h3 className="mt-1 font-display text-xl font-extrabold leading-tight text-ink md:text-2xl line-clamp-1">
+          {product.name}
+        </h3>
         <p className="mt-1 text-xs text-ink/65 line-clamp-2 leading-snug">
           {product.tagline}
         </p>
@@ -123,6 +121,15 @@ export function ProductCard({ product }: { product: Pickle }) {
             </button>
           </div>
         </div>
+
+        {/* View details link */}
+        <Link
+          href={`/product/${product.id}`}
+          className="mt-3 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-pink underline-offset-4 hover:underline"
+        >
+          View details
+          <span aria-hidden="true">→</span>
+        </Link>
 
         {/* Add to cart */}
         <button
