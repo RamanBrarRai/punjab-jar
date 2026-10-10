@@ -18,7 +18,7 @@ const reasons = [
   {
     icon: Sprout,
     title: 'Farm-fresh produce',
-    body: 'Mangoes from Hoshiarpur, carrots from Delhi mandis, picked at their peak.',
+    body: 'Mangoes from Mohali, carrots from Delhi mandis, picked at their peak.',
     className: 'bg-cream text-ink',
   },
   {

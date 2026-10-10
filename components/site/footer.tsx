@@ -57,7 +57,7 @@ export function Footer() {
         <div className="mt-16 flex flex-col gap-4 border-t border-cream/15 py-6 text-sm text-cream/60 md:flex-row md:items-center md:justify-between">
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             <li className="flex items-center gap-2">
-              <MapPin className="size-4 text-marigold" aria-hidden="true" /> Hoshiarpur, Punjab
+              <MapPin className="size-4 text-marigold" aria-hidden="true" /> Mohali, Punjab
             </li>
             <li>
               <a href="mailto:hello@jarofpunjab.com" className="flex items-center gap-2 hover:text-cream">

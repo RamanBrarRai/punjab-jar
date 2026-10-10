@@ -6,13 +6,13 @@ const reviews = [
   {
     quote: 'Opened the mango jar and my mom asked who made it. Tastes exactly like the one from her pind.',
     name: 'Harleen K.',
-    city: 'Toronto',
+    city: 'Patiala',
     className: 'bg-white -rotate-2',
   },
   {
-    quote: 'The chilli one is dangerous. I finished a whole jar with two parathas. No regrets.',
+    quote: 'The chilli one is dangerous. I finished a whole jar with in a week. No regrets.',
     name: 'Arjun M.',
-    city: 'Bengaluru',
+    city: 'Mohali',
     className: 'bg-pink text-white rotate-1',
   },
   {
@@ -24,7 +24,7 @@ const reviews = [
   {
     quote: 'Gifted the mixed jar to my in-laws. I am now the favourite. Thank you, Jar Of Punjab.',
     name: 'Rohan D.',
-    city: 'Mumbai',
+    city: 'Bathinda',
     className: 'bg-white rotate-2',
   },
 ]
@@ -48,7 +48,7 @@ export function Reviews() {
                 <Star key={i} className="size-5 fill-pink text-pink" />
               ))}
             </span>
-            <span className="font-display font-bold text-ink">4.9 from 2,400+ reviews</span>
+            <span className="font-display font-bold text-ink">4.9 from 50+ reviews</span>
           </div>
         </div>
 

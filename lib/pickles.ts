@@ -41,7 +41,7 @@ export const pickles: Pickle[] = [
     punjabi: 'Aam da Achaar',
     tagline: 'The one Nani guarded with her life.',
     description:
-      'Raw summer mangoes from Hoshiarpur, hand-cut with the stone in, sun-cured for 21 days and slow-matured in cold-pressed kachi ghani mustard oil.',
+      'Raw summer mangoes from Mohali, hand-cut with the stone in, sun-cured for 21 days and slow-matured in cold-pressed kachi ghani mustard oil.',
     heat: 2,
     notes: ['Fennel', 'Nigella', 'Fenugreek'],
     pairing: 'Aloo paratha & white butter',

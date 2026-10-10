@@ -31,10 +31,11 @@ export function Story() {
             />
           </div>
           <SpinSticker
-            text="Since 1987 • Nani's recipe • Since 1987 • "
+            text="Since 1987 • ♥ • Nani's recipe • ♥ • "
             center="♥"
             className="absolute -bottom-8 -right-4 bg-marigold text-ink md:-right-10"
           />
+          
         </div>
 
         <div>
@@ -48,7 +49,7 @@ export function Story() {
           />
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink/75">
             <p>
-              Every summer, our Nani lined the terrace in Hoshiarpur with jars of mango, lemon and chilli, turning them
+              Every summer, our Nani lined the terrace in Mohali with jars of mango, lemon and chilli, turning them
               each morning to catch the sun. The whole mohalla knew when her achaar was ready.
             </p>
             <p>

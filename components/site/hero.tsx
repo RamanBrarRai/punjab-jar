@@ -15,7 +15,7 @@ export function Hero() {
         <div>
           <p className="inline-flex -rotate-2 items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-ink shadow-pop-sm">
             <span className="size-2 rounded-full bg-pink" aria-hidden="true" />
-            Handmade in Hoshiarpur
+            Handmade in Mohali
           </p>
 
           <h1 className="mt-7 text-[clamp(3.25rem,9vw,7.5rem)] font-extrabold leading-[0.88] tracking-tight text-ink">

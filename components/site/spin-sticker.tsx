@@ -21,7 +21,7 @@ export function SpinSticker({
         <defs>
           <path id="sticker-circle" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0" />
         </defs>
-        <text className="fill-current font-display text-[10.5px] font-bold uppercase tracking-[0.18em]">
+        <text className="fill-current font-display text-[10.5px] font-bold uppercase tracking-[0.12em]">
           <textPath href="#sticker-circle">{text}</textPath>
         </text>
       </svg>
