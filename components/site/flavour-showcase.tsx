@@ -106,7 +106,7 @@ export function FlavourShowcase() {
                 <span className="font-display text-4xl font-extrabold">{formatPrice(active.price)}</span>
                 <span className="ml-2 text-sm font-semibold text-ink/60">/ {active.weight}</span>
               </p>
-              <AddToCartButton name={active.name} className="mt-0 flex-1 sm:flex-none" />
+              <AddToCartButton pickle={active} className="mt-0 flex-1 sm:flex-none" />
             </div>
           </div>
         </div>

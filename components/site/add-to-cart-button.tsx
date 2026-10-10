@@ -3,9 +3,16 @@
 import { useState } from 'react'
 import { Check, Plus } from 'lucide-react'
 import { useCart } from '@/components/cart-context'
+import type { Pickle } from '@/lib/pickles'
 import { cn } from '@/lib/utils'
 
-export function AddToCartButton({ name, className }: { name: string; className?: string }) {
+export function AddToCartButton({
+  pickle,
+  className,
+}: {
+  pickle: Pickle
+  className?: string
+}) {
   const { add } = useCart()
   const [added, setAdded] = useState(false)
 
@@ -13,7 +20,7 @@ export function AddToCartButton({ name, className }: { name: string; className?:
     <button
       type="button"
       onClick={() => {
-        add()
+        add(pickle)
         setAdded(true)
         setTimeout(() => setAdded(false), 1500)
       }}
@@ -25,7 +32,7 @@ export function AddToCartButton({ name, className }: { name: string; className?:
     >
       {added ? <Check className="size-4" aria-hidden="true" /> : <Plus className="size-4" aria-hidden="true" />}
       <span aria-live="polite">{added ? 'Added!' : 'Add to cart'}</span>
-      <span className="sr-only"> {name} achaar</span>
+      <span className="sr-only"> {pickle.punjabi}</span>
     </button>
   )
 }

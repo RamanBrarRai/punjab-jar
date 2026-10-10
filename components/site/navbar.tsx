@@ -14,11 +14,11 @@ const links = [
 ]
 
 export function Navbar() {
-  const { count } = useCart()
+  const { count, open: openCart } = useCart()
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 px-3 pt-3 md:px-6 md:pt-4">
+    <header className="sticky top-0 z-30 px-3 pt-3 md:px-6 md:pt-4">
       <nav
         aria-label="Primary"
         className="mx-auto flex h-16 max-w-7xl items-center justify-between rounded-full border-2 border-ink bg-cream/95 pl-4 pr-2 shadow-pop-sm backdrop-blur-md md:h-[4.5rem] md:pl-6"
@@ -41,20 +41,21 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <a
-            href="#shop"
+          <button
+            type="button"
+            onClick={openCart}
+            aria-label={`Open cart, ${count} ${count === 1 ? 'item' : 'items'}`}
             className="inline-flex h-11 items-center gap-2 rounded-full border-2 border-ink bg-pink px-4 text-sm font-bold text-white transition-transform hover:-translate-y-0.5 md:h-12 md:px-5"
           >
             <ShoppingBag className="size-4" aria-hidden="true" />
             <span className="hidden sm:inline">Cart</span>
-            <span className="sr-only">, {count} items</span>
             <span
               aria-hidden="true"
               className="flex size-6 items-center justify-center rounded-full bg-marigold text-xs font-bold text-ink"
             >
               {count}
             </span>
-          </a>
+          </button>
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}

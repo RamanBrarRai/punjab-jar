@@ -1,4 +1,3 @@
-import { CartProvider } from '@/components/cart-context'
 import { Navbar } from '@/components/site/navbar'
 import { Hero } from '@/components/site/hero'
 import { Marquee } from '@/components/site/marquee'
@@ -12,7 +11,7 @@ import { Footer } from '@/components/site/footer'
 
 export default function Home() {
   return (
-    <CartProvider>
+    <>
       <Navbar />
       <main>
         <Hero />
@@ -25,6 +24,6 @@ export default function Home() {
         <ClosingCta />
       </main>
       <Footer />
-    </CartProvider>
+    </>
   )
 }

@@ -62,7 +62,7 @@ export function ProductGrid() {
                   </div>
                   <p className="mt-3 flex-1 leading-relaxed text-ink/70">{p.tagline}</p>
                   <HeatMeter heat={p.heat} className="mt-4 text-ink" />
-                  <AddToCartButton name={p.name} />
+                  <AddToCartButton pickle={p} />
                 </div>
               </li>
             )
