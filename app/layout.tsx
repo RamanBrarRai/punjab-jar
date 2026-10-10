@@ -7,6 +7,8 @@ import { Navbar } from '@/components/site/navbar'
 import { Footer } from '@/components/site/footer'
 import './globals.css'
 
+export const dynamic = 'force-dynamic'
+
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
   variable: '--font-bricolage',
