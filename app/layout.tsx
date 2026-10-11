@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Bricolage_Grotesque, Inter } from 'next/font/google'
 import { CartProvider } from '@/components/cart-context'
@@ -51,7 +50,6 @@ export default function RootLayout({
           <Footer />
           <CartDrawer />
         </CartProvider>
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
