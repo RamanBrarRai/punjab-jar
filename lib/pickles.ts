@@ -62,11 +62,11 @@ export const pickles: Pickle[] = [
     category: 'pickle',
     name: 'Mango',
     punjabi: 'Aam da Achaar',
-    tagline: 'The one Nani guarded with her life.',
+    tagline: 'A Little Taste of Nani\' Kitchen.',
     description:
-      'Raw summer mangoes from Hoshiarpur, hand-cut with the stone in, sun-cured for 21 days and slow-matured in cold-pressed kachi ghani mustard oil.',
+      'Inspired by the traditional recipes I collected from my mom, nani and dadi, this Mango Achaar brings the familiar Punjabi flavours of home to your table. Made for those who love a tangy, chatpata bite with their everyday meals.',
     heat: 2,
-    notes: ['Fennel', 'Nigella', 'Fenugreek'],
+    notes: ['ਸੌਂਫ · Saunf', 'ਕਲੌਂਜੀ · Kalonji', 'ਮੇਥੀ ਦਾਣਾ · Methi Dana'],
     pairing: 'Aloo paratha & white butter',
     variants: [
       { size: '100g', price: 149 },

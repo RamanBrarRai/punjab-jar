@@ -1,13 +1,16 @@
 import { Sparkle } from 'lucide-react'
 
 const items = [
-  'Balle Balle Flavour',
-  'Small Batch',
-  'Cold-Pressed Mustard Oil',
-  'Sun-Cured',
-  'No Preservatives',
-  'Free Shipping Over ₹999',
+  'Family Recipes',
+  'Childhood Memories',
+  'Punjabi Flavors',
+  'Made With Pyaar', 
+  'From Our Kitchen to Yours',
+  'Family Recipes',
+  'Childhood Memories',
+  'Punjabi Flavors',
   'Made With Pyaar',
+  'From Our Kitchen to Yours'
 ]
 
 export function Marquee() {

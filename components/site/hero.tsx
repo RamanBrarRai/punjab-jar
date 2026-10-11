@@ -3,8 +3,8 @@ import { ArrowDownRight, Flame, Leaf, Star, Truck } from 'lucide-react'
 import { SpinSticker } from './spin-sticker'
 
 const perks = [
-  { icon: Leaf, label: 'Zero preservatives' },
-  { icon: Flame, label: 'Sun-cured 21 days' },
+  { icon: Leaf, label: 'Family-inspired recipes' },
+  { icon: Flame, label: 'Recipes tested with care' },
   { icon: Truck, label: 'Ships all-India' },
 ]
 
@@ -18,13 +18,13 @@ export function Hero() {
             Handmade in Mohali
           </p>
 
-          <h1 className="mt-7 text-[clamp(3.25rem,9vw,7.5rem)] font-extrabold leading-[0.88] tracking-tight text-ink">
-            Achaar
+          <h1 className="mt-7 text-[clamp(3rem,9vw,6rem)] font-extrabold leading-[0.88] tracking-tight text-ink">
+            Nani's Recipes.
             <br />
-            with full
+            Mum's Love.
             <br />
             <span className="relative inline-block">
-              <span className="relative z-10 text-pink">volume.</span>
+              <span className="relative z-10 text-pink">In Every Jar.</span>
               <span
                 aria-hidden="true"
                 className="absolute -bottom-1 left-0 right-0 h-4 -rotate-1 rounded-full bg-cream md:h-6"
@@ -33,8 +33,7 @@ export function Hero() {
           </h1>
 
           <p className="mt-8 max-w-md text-lg leading-relaxed text-ink/80 text-pretty">
-            Nani&apos;s recipes, turned all the way up. Sun-cured, hand-cut and slow-matured in cold-pressed
-            mustard oil — loud, proud and Punjabi to the core.
+           Born from my childhood memories and pregnancy cravings, our journey began with a working mom's wish to bring the taste of homemade achar and jam back into everyday life. Family recipes, lovingly tested and made to share.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -49,10 +48,10 @@ export function Hero() {
               />
             </a>
             <a
-              href="#flavours"
+              href="#story"
               className="inline-flex h-14 items-center rounded-full border-2 border-ink bg-cream px-7 font-bold text-ink transition-colors hover:bg-ink hover:text-cream"
             >
-              Find your flavour
+              Our Story
             </a>
           </div>
 

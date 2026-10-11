@@ -23,10 +23,10 @@ export function FlavourShowcase() {
           eyebrow="Pick your vibe"
           title={
             <>
-              Six jars. <span className="text-marigold">One Punjabi soul.</span>
+              Six jars. <span className="text-marigold">Countless Childhood Memories.</span>
             </>
           }
-          description="Tangy, fiery, sweet-sour or all of the above. Tap a flavour to meet it properly."
+          description="From tangy mango achar to fiery green chilli, discover the flavours that remind us of home, family meals, and the recipes passed down through generations."
         />
 
         <div role="tablist" aria-label="Flavours" className="mt-12 flex flex-wrap gap-3">
