@@ -11,19 +11,19 @@ export function ClosingCta() {
             <p className="inline-block rotate-[-3deg] rounded-full border-2 border-ink bg-marigold px-4 py-1 text-xs font-bold uppercase tracking-[0.2em] text-ink">
               Your thali is waiting
             </p>
-            <h2 className="mt-6 text-[clamp(3rem,8vw,6.5rem)] font-extrabold leading-[0.9] tracking-tight text-white">
-              Balle balle,
+            <h2 className="mt-6 text-[clamp(2.8rem,8vw,5.2rem)] font-extrabold leading-[0.9] tracking-tight text-white">
+              Bring Home a
               <br />
-              <span className="text-ink">bring it home.</span>
+              <span className="text-ink">Little Nostalgia.</span>
             </h2>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-white/90">
-              Build your own box of three and get 15% off. Because one jar never lasts the week.
+              Some flavours take us straight back to childhood. Find your favourite achar, share it with your family, and make everyday meals a little more special.
             </p>
             <a
               href="#shop"
               className="group mt-9 inline-flex h-14 items-center gap-3 rounded-full border-2 border-ink bg-marigold px-8 font-bold text-ink shadow-pop transition-all hover:-translate-y-0.5 hover:shadow-pop-lg"
             >
-              Build my box
+              Build My Box.
               <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </a>
           </div>

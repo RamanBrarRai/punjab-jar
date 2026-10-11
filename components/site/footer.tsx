@@ -27,11 +27,11 @@ export function Footer() {
               <Logo />
             </Link>
             <h3 className="mt-6 max-w-md font-display text-3xl font-extrabold leading-tight text-cream md:text-4xl">
-              Get first dibs on{' '}
-              <span className="text-marigold">seasonal drops.</span>
+              A Little Taste of Punjab{' '}
+              <span className="text-marigold">Straight to Your Inbox.</span>
             </h3>
             <p className="mt-3 max-w-sm text-sm text-cream/70">
-              Gajar in winter, kairi in summer. Join the list and never miss a batch.
+              Be the first to hear about new flavours, seasonal achar, homemade jam launches and little stories from our kitchen.
             </p>
             <div className="mt-5 max-w-md">
               <NewsletterForm />

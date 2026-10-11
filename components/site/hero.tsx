@@ -18,7 +18,7 @@ export function Hero() {
             Handmade in Mohali
           </p>
 
-          <h1 className="mt-7 text-[clamp(3rem,9vw,6rem)] font-extrabold leading-[0.88] tracking-tight text-ink">
+          <h1 className="mt-7 text-[clamp(2.9rem,9vw,5rem)] font-extrabold leading-[0.88] tracking-tight text-ink">
             Nani's Recipes.
             <br />
             Mum's Love.

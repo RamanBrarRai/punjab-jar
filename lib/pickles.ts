@@ -67,7 +67,7 @@ export const pickles: Pickle[] = [
       'Inspired by the traditional recipes I collected from my mom, nani and dadi, this Mango Achaar brings the familiar Punjabi flavours of home to your table. Made for those who love a tangy, chatpata bite with their everyday meals.',
     heat: 2,
     notes: ['ਸੌਂਫ · Saunf', 'ਕਲੌਂਜੀ · Kalonji', 'ਮੇਥੀ ਦਾਣਾ · Methi Dana'],
-    pairing: 'Aloo paratha & white butter',
+    pairing: 'Aloo paratha, dal, everyday meals & white butter',
     variants: [
       { size: '100g', price: 149 },
       { size: '250g', price: 299 },
@@ -82,12 +82,12 @@ export const pickles: Pickle[] = [
     category: 'pickle',
     name: 'Lemon',
     punjabi: 'Nimbu da Achaar',
-    tagline: 'Bright, tangy, quietly addictive.',
+    tagline: 'Bright, tangy and full of the zesty flavour we grew up loving.',
     description:
       'Thin-skinned desi lemons quartered and left to soften under the sun with rock salt and ajwain until the rind turns jammy and golden.',
     heat: 1,
     notes: ['Ajwain', 'Rock salt', 'Black pepper'],
-    pairing: 'Khichdi & dahi',
+    pairing: 'Khichdi, Dal, rice & parathas',
     variants: [
       { size: '100g', price: 139 },
       { size: '250g', price: 279 },
@@ -101,7 +101,7 @@ export const pickles: Pickle[] = [
     category: 'pickle',
     name: 'Mixed',
     punjabi: 'Mix Achaar',
-    tagline: 'A whole kitchen garden in one jar.',
+    tagline: 'A little bit of everything we love, bringing different Punjabi pickle flavours together in one jar.',
     description:
       'Mango, carrot, lemon, cauliflower and green chilli tossed together in our house masala — the jar every Punjabi dining table is incomplete without.',
     heat: 2,

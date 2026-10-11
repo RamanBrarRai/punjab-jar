@@ -39,10 +39,11 @@ export function WhyUs() {
           eyebrow="Why Jar Of Punjab"
           title={
             <>
-              No shortcuts. <span className="text-marigold">Just chakh.</span>
+              Not Just Achaar. <br/>
+              <span className="text-marigold"> A Story in Every Jar.</span>
             </>
           }
-          description="Real achaar takes patience. Here's what goes into every single jar."
+          description="Every recipe has a memory behind it. Here's the story, care and patience we bring to our journey."
         />
 
         <ul className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

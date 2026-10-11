@@ -151,7 +151,7 @@
   gap: 2rem;
   padding: 1rem 0;
   white-space: nowrap;
-  animation: marqueeGiant 40s linear infinite;
+  animation: marqueeGiant 15s linear infinite;
   will-change: transform;
 }
 

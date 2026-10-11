@@ -40,7 +40,7 @@ export function Story() {
 
         <div>
           <SectionHeading
-            eyebrow="Saadi kahani"
+            eyebrow="Saadi kahani — Our Story"
             title={
               <>
                 It started with <span className="text-pink">Nani&apos;s</span> rooftop.
