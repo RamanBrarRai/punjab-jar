@@ -10,8 +10,10 @@ const perks = [
 
 export function Hero() {
   return (
-    <section id="top" className="relative -mt-24 overflow-hidden bg-marigold pt-28 md:-mt-28 md:pt-36">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 md:px-8 md:pb-24 lg:grid-cols-[1.1fr_1fr]">
+    <section id="top" className="hero-section relative -mt-24 overflow-hidden bg-marigold pt-28 md:-mt-28 md:pt-36">
+      <div aria-hidden="true" className="hero-sunburst pointer-events-none absolute -right-28 top-28 size-72 rounded-full border-[1px] border-ink/15 md:right-[8%] md:top-24 md:size-96" />
+      <div aria-hidden="true" className="hero-orbit pointer-events-none absolute right-[7%] top-36 hidden size-20 rounded-full border-2 border-ink/30 lg:block" />
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 md:px-8 md:pb-24 lg:grid-cols-[1.1fr_1fr]">
         <div>
           <p className="inline-flex -rotate-2 items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-ink shadow-pop-sm">
             <span className="size-2 rounded-full bg-pink" aria-hidden="true" />
@@ -70,7 +72,7 @@ export function Hero() {
             aria-hidden="true"
             className="absolute inset-0 translate-x-4 translate-y-4 rounded-t-full rounded-b-[2.5rem] border-2 border-ink bg-pink"
           />
-          <div className="relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2.5rem] border-2 border-ink bg-cream">
+          <div className="hero-product-float relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2.5rem] border-2 border-ink bg-cream">
             <Image
               src="/images/hero-vibrant.png"
               alt="Three jars of Punjabi achaar on a hot pink phulkari cloth with marigolds and red chillies"
@@ -87,7 +89,7 @@ export function Hero() {
             className="absolute -left-4 top-10 md:-left-10"
           />
 
-          <div className="absolute -bottom-5 right-2 rotate-3 rounded-2xl border-2 border-ink bg-emerald px-5 py-3 text-cream shadow-pop-sm md:-right-6">
+          <div className="hero-proof-card absolute -bottom-5 right-2 rotate-3 rounded-2xl border-2 border-ink bg-emerald px-5 py-3 text-cream shadow-pop-sm md:-right-6">
             <p className="flex items-center gap-1 font-display text-3xl font-extrabold leading-none">
               4.9
               <Star className="size-6 fill-marigold text-marigold" aria-label="stars" />
