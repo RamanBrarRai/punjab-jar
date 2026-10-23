@@ -47,18 +47,6 @@
   --animate-marquee: marquee 35s linear infinite;
   --animate-spin-slow: spin 18s linear infinite;
   --animate-wiggle: wiggle 3s ease-in-out infinite;
-  --animate-fade-up: fade-up 0.6s ease-out both;
-
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
 
   @keyframes marquee {
     from {
@@ -109,11 +97,6 @@
   }
   html {
     scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-  }
-  ::selection {
-    background: var(--color-pink);
-    color: #fff;
   }
   body {
     @apply bg-background text-foreground font-sans;
@@ -154,8 +137,7 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .animate-spin-slow,
-  .animate-wiggle,
-  .animate-fade-up {
+  .animate-wiggle {
     animation: none;
   }
 }
@@ -210,108 +192,76 @@
     animation: none;
   }
 }
-
-/* Jar of Punjab — premium motion pass */
-.hero-section {
-  isolation: isolate;
+/* ============================================================
+   IMAGE ANIMATIONS — hover / scroll / float
+   ============================================================ */
+@keyframes imgFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
-.hero-sunburst {
-  background: repeating-conic-gradient(from 0deg, rgb(255 244 224 / 0.12) 0deg 8deg, transparent 8deg 16deg);
-  animation: hero-sun-turn 70s linear infinite;
-}
-
-.hero-orbit {
-  box-shadow: 0 0 0 14px rgb(255 244 224 / 0.16), 0 0 0 28px rgb(27 11 18 / 0.06);
-  animation: hero-orbit-pulse 5s ease-in-out infinite;
-}
-
-.hero-product-float {
-  transform: translateZ(0);
-  box-shadow: 0 22px 0 -8px rgb(27 11 18 / 0.08);
-  animation: hero-product-drift 6s ease-in-out infinite;
+.img-float {
+  animation: imgFloat 4s ease-in-out infinite;
   will-change: transform;
 }
 
-.hero-product-float img {
-  transition: transform 800ms cubic-bezier(0.2, 0.75, 0.25, 1), filter 800ms ease;
+.img-hover-zoom {
+  overflow: hidden;
+}
+.img-hover-zoom > img,
+.img-hover-zoom img {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.img-hover-zoom:hover > img,
+.img-hover-zoom:hover img {
+  transform: scale(1.08);
 }
 
-.hero-product-float:hover img {
-  transform: scale(1.045) rotate(-1deg);
-  filter: saturate(1.08);
+.img-tilt {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.img-tilt:hover {
+  transform: rotate(-2deg) scale(1.03);
 }
 
-.hero-proof-card {
-  animation: hero-card-arrive 700ms 250ms both cubic-bezier(0.2, 0.8, 0.2, 1);
+.img-swing {
+  transform-origin: top center;
+  animation: imgSwing 3.5s ease-in-out infinite;
+}
+@keyframes imgSwing {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
 }
 
-@keyframes hero-product-drift {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-9px) rotate(0.35deg); }
-}
-
-@keyframes hero-sun-turn {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes hero-orbit-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.7; }
-  50% { transform: scale(1.09); opacity: 1; }
-}
-
-@keyframes hero-card-arrive {
-  from { opacity: 0; transform: translate3d(18px, 14px, 0) rotate(0deg); }
-  to { opacity: 1; transform: translate3d(0, 0, 0) rotate(3deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-sunburst,
-  .hero-orbit,
-  .hero-product-float,
-  .hero-proof-card {
-    animation: none !important;
-  }
-  .hero-product-float img { transition: none; }
-}
-
-/* ============================================================
-   LIVE IMAGES — subtle 3D tilt, parallax drift, scroll reveal
-   ============================================================ */
-.live-image[data-revealed='false'] {
+/* Scroll reveal */
+[data-reveal] {
   opacity: 0;
-  transform: translateY(18px) scale(0.97);
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
-.live-image {
-  transition:
-    opacity 0.8s ease-out,
-    transform 0.8s ease-out;
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
-.live-image-inner {
-  transition: transform 0.25s ease-out;
-  translate: 0 var(--drift, 0px);
-}
-.live-image[data-revealed='true'] .live-image-inner img {
-  animation: jar-float 7s ease-in-out infinite;
-}
-@keyframes jar-float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(-0.6deg);
-  }
-  50% {
-    transform: translateY(-5px) rotate(0.6deg);
-  }
-}
+[data-reveal="left"] { transform: translateX(-28px); }
+[data-reveal="left"].is-visible { transform: translateX(0); }
+[data-reveal="right"] { transform: translateX(28px); }
+[data-reveal="right"].is-visible { transform: translateX(0); }
+[data-reveal="zoom"] { transform: scale(0.92); }
+[data-reveal="zoom"].is-visible { transform: scale(1); }
+
 @media (prefers-reduced-motion: reduce) {
-  .live-image,
-  .live-image-inner,
-  .live-image-inner img {
-    animation: none !important;
-    transition: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    translate: none !important;
+  .img-float,
+  .img-swing {
+    animation: none;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

@@ -6,7 +6,6 @@ import { Minus, Plus, ShoppingBag, Check } from 'lucide-react'
 import { useCart } from '@/components/cart-context'
 import { formatPrice, toneFor, toneStyles, type Pickle } from '@/lib/pickles'
 import { cn } from '@/lib/utils'
-import { LiveImage } from './live-image'
 
 export function ProductCard({ product }: { product: Pickle }) {
   const { add } = useCart()
@@ -30,21 +29,20 @@ export function ProductCard({ product }: { product: Pickle }) {
   }
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border-2 border-ink bg-white shadow-pop-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-pop motion-safe:animate-fade-up">
+    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border-2 border-ink bg-white shadow-pop-sm transition-transform hover:-translate-y-0.5">
       {/* Image */}
       <Link
         href={`/product/${product.id}`}
-        className="relative block aspect-[4/3] overflow-hidden border-b-2 border-ink"
+        className="relative block aspect-[4/3] overflow-hidden border-b-2 border-ink img-hover-zoom"
+        data-reveal="zoom"
       >
         {product.image.startsWith('/') ? (
-          <LiveImage>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={product.image}
-              alt={product.name}
-              className="h-full w-full object-cover"
-            />
-          </LiveImage>
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={product.image}
+            alt={product.name}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
         ) : (
           <div className={cn('flex h-full w-full items-center justify-center text-6xl', tone.soft)}>
             {product.image}

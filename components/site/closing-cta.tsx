@@ -30,13 +30,13 @@ export function ClosingCta() {
 
           <div className="relative mx-auto aspect-square w-full max-w-sm">
             <div className="absolute inset-0 rotate-6 rounded-full border-2 border-ink bg-marigold" aria-hidden="true" />
-            <div className="relative size-full overflow-hidden rounded-full border-2 border-ink">
+            <div className="relative size-full overflow-hidden rounded-full border-2 border-ink img-hover-zoom" data-reveal="zoom">
               <Image
                 src="/images/lineup.png"
                 alt="A lineup of Jar Of Punjab achaar jars"
                 fill
                 sizes="(min-width: 1024px) 384px, 80vw"
-                className="object-cover"
+                className="object-cover img-zoom"
               />
             </div>
             <span className="absolute -left-2 top-6 flex size-24 -rotate-12 animate-wiggle flex-col items-center justify-center rounded-full border-2 border-ink bg-emerald text-center font-display font-extrabold leading-none text-cream">
