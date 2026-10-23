@@ -55,7 +55,7 @@ export function ProductDetail({ product }: { product: Pickle }) {
               )}
               aria-hidden="true"
             />
-            <div className="relative aspect-square overflow-hidden rounded-[2rem] border-2 border-ink bg-white">
+            <div className="relative aspect-square overflow-hidden rounded-[2rem] border-2 border-ink bg-white img-hover-zoom" data-reveal="left">
               {isImagePath ? (
                 <Image
                   src={product.image}

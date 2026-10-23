@@ -33,7 +33,8 @@ export function ProductCard({ product }: { product: Pickle }) {
       {/* Image */}
       <Link
         href={`/product/${product.id}`}
-        className="relative block aspect-[4/3] overflow-hidden border-b-2 border-ink"
+        className="relative block aspect-[4/3] overflow-hidden border-b-2 border-ink img-hover-zoom"
+        data-reveal="zoom"
       >
         {product.image.startsWith('/') ? (
           // eslint-disable-next-line @next/next/no-img-element

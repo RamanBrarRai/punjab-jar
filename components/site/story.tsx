@@ -21,9 +21,9 @@ export function Story() {
       <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-5 md:px-8 lg:grid-cols-2">
         <div className="relative mx-auto w-full max-w-md lg:mx-0">
           <div className="absolute inset-0 -rotate-3 rounded-[2.5rem] border-2 border-ink bg-emerald" aria-hidden="true" />
-          <div className="relative aspect-[4/5] rotate-2 overflow-hidden rounded-[2.5rem] border-2 border-ink">
+          <div className="relative aspect-[4/5] rotate-2 overflow-hidden rounded-[2.5rem] border-2 border-ink img-hover-zoom" data-reveal="left">
             <Image
-              src="/images/story.png"
+              src="/images/story.jpg"
               alt="Hands preparing achaar in a Punjabi home kitchen"
               fill
               sizes="(min-width: 1024px) 448px, 90vw"
