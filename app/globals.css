@@ -247,11 +247,11 @@
   opacity: 1;
   transform: translateY(0);
 }
-[data-reveal="left"] { transform: translateX(-28px); }
+/* [data-reveal="left"] { transform: translateX(-28px); }
 [data-reveal="left"].is-visible { transform: translateX(0); }
 [data-reveal="right"] { transform: translateX(28px); }
-[data-reveal="right"].is-visible { transform: translateX(0); }
-[data-reveal="zoom"] { transform: scale(0.92); }
+[data-reveal="right"].is-visible { transform: translateX(0); } */
+/* [data-reveal="zoom"] { transform: scale(0.92); } */
 [data-reveal="zoom"].is-visible { transform: scale(1); }
 
 @media (prefers-reduced-motion: reduce) {
