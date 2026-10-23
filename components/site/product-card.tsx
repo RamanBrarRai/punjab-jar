@@ -29,7 +29,7 @@ export function ProductCard({ product }: { product: Pickle }) {
   }
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border-2 border-ink bg-white shadow-pop-sm transition-transform hover:-translate-y-0.5">
+    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border-2 border-ink bg-white shadow-pop-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-pop motion-safe:animate-fade-up">
       {/* Image */}
       <Link
         href={`/product/${product.id}`}

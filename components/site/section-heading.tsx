@@ -20,7 +20,7 @@ export function SectionHeading({
     <div className={cn(align === 'center' && 'mx-auto text-center', 'max-w-3xl', className)}>
       <p
         className={cn(
-          'inline-block -rotate-1 rounded-full border-2 px-4 py-1 text-xs font-bold uppercase tracking-[0.2em]',
+          'inline-block -rotate-1 rounded-full border-2 px-4 py-1.5 shadow-pop-sm text-xs font-bold uppercase tracking-[0.2em]',
           light ? 'border-cream bg-pink text-white' : 'border-ink bg-marigold text-ink',
         )}
       >
@@ -28,7 +28,7 @@ export function SectionHeading({
       </p>
       <h2
         className={cn(
-          'mt-5 text-5xl font-extrabold leading-[0.95] tracking-tight md:text-7xl',
+          'mt-5 text-4xl font-extrabold leading-[1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl',
           light ? 'text-cream' : 'text-ink',
         )}
       >
