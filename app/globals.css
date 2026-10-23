@@ -275,3 +275,43 @@
   }
   .hero-product-float img { transition: none; }
 }
+
+/* ============================================================
+   LIVE IMAGES — subtle 3D tilt, parallax drift, scroll reveal
+   ============================================================ */
+.live-image[data-revealed='false'] {
+  opacity: 0;
+  transform: translateY(18px) scale(0.97);
+}
+.live-image {
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+}
+.live-image-inner {
+  transition: transform 0.25s ease-out;
+  translate: 0 var(--drift, 0px);
+}
+.live-image[data-revealed='true'] .live-image-inner img {
+  animation: jar-float 7s ease-in-out infinite;
+}
+@keyframes jar-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.6deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(0.6deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-image,
+  .live-image-inner,
+  .live-image-inner img {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    translate: none !important;
+  }
+}

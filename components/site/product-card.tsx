@@ -6,6 +6,7 @@ import { Minus, Plus, ShoppingBag, Check } from 'lucide-react'
 import { useCart } from '@/components/cart-context'
 import { formatPrice, toneFor, toneStyles, type Pickle } from '@/lib/pickles'
 import { cn } from '@/lib/utils'
+import { LiveImage } from './live-image'
 
 export function ProductCard({ product }: { product: Pickle }) {
   const { add } = useCart()
@@ -36,12 +37,14 @@ export function ProductCard({ product }: { product: Pickle }) {
         className="relative block aspect-[4/3] overflow-hidden border-b-2 border-ink"
       >
         {product.image.startsWith('/') ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={product.image}
-            alt={product.name}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+          <LiveImage>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={product.image}
+              alt={product.name}
+              className="h-full w-full object-cover"
+            />
+          </LiveImage>
         ) : (
           <div className={cn('flex h-full w-full items-center justify-center text-6xl', tone.soft)}>
             {product.image}

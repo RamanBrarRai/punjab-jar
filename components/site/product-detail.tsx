@@ -8,6 +8,7 @@ import { useCart } from '@/components/cart-context'
 import { formatPrice, toneFor, toneStyles, type Pickle } from '@/lib/pickles'
 import { cn } from '@/lib/utils'
 import { HeatMeter } from './heat-meter'
+import { LiveImage } from './live-image'
 
 export function ProductDetail({ product }: { product: Pickle }) {
   const { add } = useCart()
@@ -57,14 +58,16 @@ export function ProductDetail({ product }: { product: Pickle }) {
             />
             <div className="relative aspect-square overflow-hidden rounded-[2rem] border-2 border-ink bg-white">
               {isImagePath ? (
-                <Image
-                  src={product.image}
-                  alt={`A jar of ${product.name}`}
-                  fill
-                  priority
-                  sizes="(min-width: 768px) 500px, 90vw"
-                  className="object-cover"
-                />
+                <LiveImage>
+                  <Image
+                    src={product.image}
+                    alt={`A jar of ${product.name}`}
+                    fill
+                    priority
+                    sizes="(min-width: 768px) 500px, 90vw"
+                    className="object-cover"
+                  />
+                </LiveImage>
               ) : (
                 <div
                   className={cn(
