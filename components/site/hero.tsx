@@ -70,14 +70,14 @@ export function Hero() {
             aria-hidden="true"
             className="absolute inset-0 translate-x-4 translate-y-4 rounded-t-full rounded-b-[2.5rem] border-2 border-ink bg-pink"
           />
-          <div className="relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2.5rem] border-2 border-ink bg-cream img-hover-zoom" data-reveal="zoom">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2.5rem] border-2 border-ink bg-cream">
             <Image
               src="/images/hero-vibrant.png"
               alt="Three jars of Punjabi achaar on a hot pink phulkari cloth with marigolds and red chillies"
               fill
               priority
               sizes="(min-width: 1024px) 512px, 90vw"
-              className="object-cover img-zoom"
+              className="object-cover"
             />
           </div>
 
