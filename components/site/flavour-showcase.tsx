@@ -63,7 +63,7 @@ export function FlavourShowcase() {
         >
           <div className="relative">
             <div className={cn('absolute inset-0 rotate-3 rounded-[2rem] border-2 border-ink', tone.bg)} aria-hidden="true" />
-            <div className="relative aspect-square overflow-hidden rounded-[2rem] border-2 border-ink">
+            <div className="relative aspect-square overflow-hidden rounded-[2rem] border-2 border-ink img-hover-zoom" data-reveal="right">
               <Image
                 key={active.id}
                 src={active.image}
@@ -89,7 +89,7 @@ export function FlavourShowcase() {
             <p className="mt-5 leading-relaxed text-ink/75">{active.description}</p>
 
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <HeatMeter heat={active.heat} className="rounded-full border-2 border-ink px-3 py-1.5" />
+              <HeatMeter heat={active.heat ?? 1} className="rounded-full border-2 border-ink px-3 py-1.5" />
               {active.notes.map((note) => (
                 <span key={note} className={cn('rounded-full border-2 border-ink px-3 py-1.5 text-sm font-semibold', tone.soft)}>
                   {note}

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Bricolage_Grotesque, Inter } from 'next/font/google'
 import { CartProvider } from '@/components/cart-context'
 import { CartDrawer } from '@/components/site/cart-drawer'
+import { ScrollReveal } from '@/components/site/scroll-reveal'
 import { Navbar } from '@/components/site/navbar'
 import { Footer } from '@/components/site/footer'
 import './globals.css'
@@ -49,6 +50,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
           <CartDrawer />
+          <ScrollReveal />
         </CartProvider>
       </body>
     </html>
