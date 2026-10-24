@@ -40,9 +40,11 @@ function ShopContent() {
     router.push(url, { scroll: false })
   }
 
-  // TODO: When jams/spices go live, change back to: active === 'all' ? pickles : ...
-    const available = productsByCategory('pickle')
-    const items = active === 'all' ? available : productsByCategory(active)
+  // Strictly limit to the 6 available pickles right now
+  const available = productsByCategory('pickle')
+  
+  // If 'all' is selected, show the available list. Otherwise, filter by category.
+  const items = active === 'all' ? available : productsByCategory(active)
 
   return (
     <main className="min-h-screen bg-cream pt-24 md:pt-32">
@@ -68,8 +70,10 @@ function ShopContent() {
         >
           {filters.map((f) => {
             const selected = f.slug === active
-            const count =
-              f.slug === 'all' ? pickles.length : productsByCategory(f.slug).length
+            
+            // Updated count logic so 'All' strictly reflects the currently available 6 items
+            const count = f.slug === 'all' ? available.length : productsByCategory(f.slug).length
+            
             return (
               <button
                 key={f.slug}

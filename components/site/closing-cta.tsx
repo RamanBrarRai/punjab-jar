@@ -32,7 +32,7 @@ export function ClosingCta() {
             <div className="absolute inset-0 rotate-6 rounded-full border-2 border-ink bg-marigold" aria-hidden="true" />
             <div className="relative size-full overflow-hidden rounded-full border-2 border-ink img-hover-zoom" data-reveal="zoom">
               <Image
-                src="/images/lineup.png"
+                src="/images/recipe-note.jpg"
                 alt="A lineup of Jar Of Punjab achaar jars"
                 fill
                 sizes="(min-width: 1024px) 384px, 80vw"

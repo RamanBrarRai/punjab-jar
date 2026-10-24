@@ -9,9 +9,8 @@ import { Logo } from './logo'
 
 const links = [
   { href: '/shop?category=pickle', label: 'Pickle', key: 'pickle' },
-  { href: '/coming-soon', label: 'Jam', key: 'jam' },
-  { href: '/coming-soon', label: 'Spices', key: 'spices' },
-  { href: '/#story', label: 'Our Story', key: 'story' },
+  { href: '/coming-soon', label: 'Jam & Spices', key: 'jam-spices' },
+  { href: '/our-story', label: 'Our Story', key: 'story' },
   { href: '/#reviews', label: 'Reviews', key: 'reviews' },
 ]
 
@@ -25,8 +24,8 @@ export function Navbar() {
   // Highlight logic — matches current URL to a nav link
   const isActive = (key: string) => {
     if (key === 'pickle' && pathname === '/shop' && (category === 'pickle' || !category)) return true
-    if (key === 'jam' && (pathname === '/coming-soon')) return true
-    if (key === 'spices' && (pathname === '/coming-soon')) return true
+    if (key === 'jam-spices' && pathname === '/coming-soon') return true
+    if (key === 'story' && pathname === '/our-story') return true
     return false
   }
 
