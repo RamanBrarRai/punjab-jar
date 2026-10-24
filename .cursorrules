@@ -1,0 +1,20 @@
+# Jar of Punjab - Project Rules for AI
+
+## Tech Stack
+- Next.js 15 (App Router), React 19, Tailwind CSS, `motion/react` (DO NOT use `framer-motion`), `react-icons`.
+
+## Strict UI & Design Rules
+- **DO NOT** change the layout structure of sections unless explicitly asked.
+- **DO NOT** change the font families. Headings use the default sans-serif (or specific `font-serif` where indicated).
+- **DO NOT** introduce new colors. Use ONLY the exact hex codes defined in the `BRAND` object.
+- **Styling**: Use Tailwind CSS. Do not write custom CSS files.
+- **Borders & Shadows**: Use the exact neo-brutalist classes already present (e.g., `border-[3px] border-black shadow-[4px_4px_0px_0px_#000]`). Do not soften them or change them to standard Tailwind shadows.
+
+## Coding Rules
+- **Images**: Always use `next/image`. If using `fill`, the parent container MUST have `relative`. Never mix `fill` and explicit `width/height`.
+- **Imports**: Keep imports exactly as they are. Do not remove unused imports unless asked.
+- **Animations**: Use the existing `fadeUp` and `float` variants. Do not create new animation logic.
+
+## How to respond to prompts
+- If asked to change text, ONLY change the text string. Do not touch the surrounding HTML/JSX or Tailwind classes.
+- If asked to fix a bug, provide ONLY the specific block of code that needs replacing, not the entire file.

@@ -4,6 +4,7 @@ export type Category = 'pickle' | 'jam' | 'spices'
 export type Variant = {
   size: string
   price: number
+  originalPrice?: number // Added to show the crossed-out price
 }
 
 export const toneStyles: Record<Tone, { bg: string; text: string; soft: string }> = {
@@ -53,9 +54,20 @@ export type Pickle = {
   badge?: string
   defaultSize: string
   comingSoon?: boolean
+  discount?: number // NEW: Added to track the discount percentage
 }
 
-export const pickles: Pickle[] = [
+// Helper to apply discount cleanly
+const applyDiscount = (variants: Variant[], discountPercent: number = 10): Variant[] => {
+  return variants.map((v) => ({
+    ...v,
+    originalPrice: v.price,
+    // Multiply by 0.9, then round to nearest whole number (e.g. 299 * 0.9 = 269.1 -> 269)
+    price: Math.round(v.price * (1 - discountPercent / 100)),
+  }))
+}
+
+const rawPickles: Pickle[] = [
   // ─────────────── PICKLES ───────────────
   {
     id: 'mango',
@@ -76,6 +88,7 @@ export const pickles: Pickle[] = [
     defaultSize: '250g',
     image: '/images/mango.png',
     badge: 'Bestseller',
+    discount: 10, // Applied 10% off
   },
   {
     id: 'lemon',
@@ -95,6 +108,7 @@ export const pickles: Pickle[] = [
     ],
     defaultSize: '250g',
     image: '/images/lemon.png',
+    discount: 10,
   },
   {
     id: 'mixed',
@@ -115,6 +129,7 @@ export const pickles: Pickle[] = [
     defaultSize: '250g',
     image: '/images/mixed.png',
     badge: 'Family size',
+    discount: 10,
   },
   {
     id: 'chilli',
@@ -134,6 +149,7 @@ export const pickles: Pickle[] = [
     ],
     defaultSize: '250g',
     image: '/images/chilli.png',
+    discount: 10,
   },
   {
     id: 'amla',
@@ -154,6 +170,7 @@ export const pickles: Pickle[] = [
     defaultSize: '250g',
     image: '/images/amla.png',
     badge: 'New',
+    discount: 10,
   },
   {
     id: 'carrot',
@@ -173,6 +190,7 @@ export const pickles: Pickle[] = [
     ],
     defaultSize: '250g',
     image: '/images/carrot.png',
+    discount: 10,
   },
 
   // ─────────────── JAMS ───────────────
@@ -192,8 +210,7 @@ export const pickles: Pickle[] = [
     ],
     defaultSize: '250g',
     image: '🥝',
-    // TODO: Remove comment when kiwi jam goes live
-    // comingSoon: true,
+    discount: 10,
   },
   {
     id: 'strawberry-jam',
@@ -212,8 +229,7 @@ export const pickles: Pickle[] = [
     defaultSize: '250g',
     image: '🍓',
     badge: 'Bestseller',
-    // TODO: Remove comment when kiwi jam goes live
-    // comingSoon: true,
+    discount: 10,
   },
   {
     id: 'mix-jam',
@@ -231,8 +247,7 @@ export const pickles: Pickle[] = [
     ],
     defaultSize: '250g',
     image: '🍯',
-    // TODO: Remove comment when kiwi jam goes live
-    // comingSoon: true,
+    discount: 10,
   },
   {
     id: 'amla-beetroot-jam',
@@ -251,8 +266,7 @@ export const pickles: Pickle[] = [
     defaultSize: '250g',
     image: '🫐',
     badge: 'New',
-    // TODO: Remove comment when kiwi jam goes live
-    // comingSoon: true,
+    discount: 10,
   },
   {
     id: 'pineapple-jam',
@@ -270,8 +284,7 @@ export const pickles: Pickle[] = [
     ],
     defaultSize: '250g',
     image: '🍍',
-    // TODO: Remove comment when kiwi jam goes live
-    // comingSoon: true,
+    discount: 10,
   },
 
   // ─────────────── SPICES ───────────────
@@ -291,8 +304,7 @@ export const pickles: Pickle[] = [
     ],
     defaultSize: '50g',
     image: '⚫',
-    // TODO: Remove comment when kiwi jam goes live
-    // comingSoon: true,
+    discount: 10,
   },
   {
     id: 'red-chilli',
@@ -311,8 +323,7 @@ export const pickles: Pickle[] = [
     defaultSize: '50g',
     image: '🌶️',
     badge: 'Bestseller',
-    // TODO: Remove comment when kiwi jam goes live
-    // comingSoon: true,
+    discount: 10,
   },
   {
     id: 'coriander',
@@ -330,8 +341,7 @@ export const pickles: Pickle[] = [
     ],
     defaultSize: '50g',
     image: '🟢',
-    // TODO: Remove comment when kiwi jam goes live
-    // comingSoon: true,
+    discount: 10,
   },
   {
     id: 'turmeric',
@@ -349,8 +359,7 @@ export const pickles: Pickle[] = [
     ],
     defaultSize: '50g',
     image: '🟡',
-    // TODO: Remove comment when kiwi jam goes live
-    // comingSoon: true,
+    discount: 10,
   },
   {
     id: 'cumin',
@@ -368,8 +377,7 @@ export const pickles: Pickle[] = [
     ],
     defaultSize: '50g',
     image: '🌾',
-    // TODO: Remove comment when kiwi jam goes live
-    // comingSoon: true,
+    discount: 10,
   },
   {
     id: 'dry-ginger',
@@ -387,8 +395,7 @@ export const pickles: Pickle[] = [
     ],
     defaultSize: '50g',
     image: '🫚',
-    // TODO: Remove comment when kiwi jam goes live
-    // comingSoon: true,
+    discount: 10,
   },
   {
     id: 'hing',
@@ -406,8 +413,7 @@ export const pickles: Pickle[] = [
     ],
     defaultSize: '50g',
     image: '🟤',
-    // TODO: Remove comment when kiwi jam goes live
-    // comingSoon: true,
+    discount: 10,
   },
   {
     id: 'fennel',
@@ -425,10 +431,20 @@ export const pickles: Pickle[] = [
     ],
     defaultSize: '50g',
     image: '🌿',
-    // TODO: Remove comment when kiwi jam goes live
-    // comingSoon: true,
+    discount: 10,
   },
-]
+];
+
+// FINAL EXPORT: Map over raw pickles to apply the discount to all variants
+export const pickles: Pickle[] = rawPickles.map((product) => {
+  if (product.discount) {
+    return {
+      ...product,
+      variants: applyDiscount(product.variants, product.discount),
+    };
+  }
+  return product;
+});
 
 export function formatPrice(value: number) {
   return new Intl.NumberFormat('en-IN', {

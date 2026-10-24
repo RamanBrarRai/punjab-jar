@@ -32,7 +32,8 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null)
 
-const STORAGE_KEY = 'jop-cart-v2'   // bumped version — old carts will be cleared
+// CHANGED: Bumped to v3 to force a fresh cart with new discounted prices
+const STORAGE_KEY = 'jop-cart-v3'   
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
@@ -109,6 +110,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     [items]
   )
 
+  // This now correctly calculates using the discounted price from the variant
   const subtotal = useMemo(
     () => items.reduce((sum, i) => sum + i.variant.price * i.qty, 0),
     [items]
