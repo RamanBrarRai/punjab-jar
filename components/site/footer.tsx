@@ -11,7 +11,7 @@ export function Footer() {
   const ref = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
   
-  // Magic Spotlight Effect state
+  // MAGIC EFFECT 1: Mouse Tracking Spotlight State (Footer Background)
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   
@@ -20,11 +20,33 @@ export function Footer() {
 
   const background = useMotionTemplate`radial-gradient(600px circle at ${springX}px ${springY}px, rgba(255, 31, 139, 0.15), transparent 80%)`;
 
+  // MAGIC EFFECT 3: Mouse Tracking for Marquee Flashlight
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const marqueeMouseX = useMotionValue(-1000); // Start off-screen
+  const marqueeMouseY = useMotionValue(-1000);
+  
+  const marqueeSpringX = useSpring(marqueeMouseX, { stiffness: 200, damping: 25 });
+  const marqueeSpringY = useSpring(marqueeMouseY, { stiffness: 200, damping: 25 });
+
+  // The spotlight mask that follows the mouse (White text reveals exactly here)
+  const marqueeMask = useMotionTemplate`radial-gradient(circle 150px at ${marqueeSpringX}px ${marqueeSpringY}px, black 15%, transparent 70%)`;
+
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (!ref.current || shouldReduceMotion) return;
-    const { left, top } = ref.current.getBoundingClientRect();
-    mouseX.set(e.clientX - left);
-    mouseY.set(e.clientY - top);
+    if (shouldReduceMotion) return;
+    
+    // Update footer background spotlight
+    if (ref.current) {
+      const { left, top } = ref.current.getBoundingClientRect();
+      mouseX.set(e.clientX - left);
+      mouseY.set(e.clientY - top);
+    }
+
+    // Update marquee flashlight
+    if (marqueeRef.current) {
+      const { left, top } = marqueeRef.current.getBoundingClientRect();
+      marqueeMouseX.set(e.clientX - left);
+      marqueeMouseY.set(e.clientY - top);
+    }
   }
 
   return (
@@ -74,8 +96,7 @@ export function Footer() {
             </Link>
             <h2 className="mb-4 text-3xl font-black leading-tight text-white md:text-4xl">
               A Little Taste of Punjab <br />
-              {/* RESTORED YELLOW COLOR */}
-              <span className="text-[#FFC107]">Straight to Your Inbox.</span> 
+              <span className="text-[#FFC107]">Straight to Your Inbox.</span>
             </h2>
             <p className="mb-6 max-w-sm text-sm text-gray-400">
               Be the first to hear about new flavours, seasonal achar, homemade jam launches and little stories from our kitchen.
@@ -98,7 +119,6 @@ export function Footer() {
 
           {/* Links */}
           <div>
-            {/* RESTORED PINK COLOR */}
             <h3 className="mb-4 text-sm font-black uppercase tracking-widest text-[#FF1F8B]">Shop</h3>
             <ul className="space-y-3 text-sm text-gray-400">
               <li><Link href="/shop" className="hover:text-white transition-colors">All jars</Link></li>
@@ -109,7 +129,6 @@ export function Footer() {
           </div>
 
           <div>
-            {/* RESTORED PINK COLOR */}
             <h3 className="mb-4 text-sm font-black uppercase tracking-widest text-[#FF1F8B]">About</h3>
             <ul className="space-y-3 text-sm text-gray-400">
               <li><Link href="/our-story" className="hover:text-white transition-colors">Our story</Link></li>
@@ -122,57 +141,79 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-white/10 py-8 text-sm text-gray-300 md:flex-row">
           <div className="flex flex-wrap items-center gap-6 md:gap-8">
-            {/* Location */}
             <span className="flex items-center gap-2">
               <MapPin className="h-4 w-4 text-[#FFC107]" /> 
               <span>Mohali, Punjab</span>
             </span>
-            
-            {/* Email */}
             <a href="mailto:hello@jarofpunjab.com" className="flex items-center gap-2 hover:text-white transition-colors">
               <Mail className="h-4 w-4 text-[#FFC107]" /> 
               <span>hello@jarofpunjab.com</span>
             </a>
-            
-            {/* Instagram */}
             <a href="https://instagram.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-white transition-colors">
               <FaInstagram className="h-4 w-4 text-[#FFC107]" /> 
               <span>@jarofpunjab</span>
             </a>
           </div>
-          
-          {/* Copyright */}
           <p className="text-gray-400">
             © {new Date().getFullYear()} Jar Of Punjab. Made with pyaar.
           </p>
         </div>
       </div>
 
-      {/* MAGIC EFFECT 3: Infinite Scrolling Marquee */}
-      <div className="relative mt-8 w-full overflow-hidden pb-4">
+      {/* MAGIC EFFECT 3: Infinite Scrolling Marquee with Flashlight Hover */}
+      <div 
+        ref={marqueeRef}
+        className="relative mt-8 w-full overflow-hidden pb-4"
+      >
+        {/* --- LAYER 1: Base Pink Text --- */}
         <motion.div
           animate={shouldReduceMotion ? {} : { x: ["0%", "-50%"] }}
-          transition={{ 
-            duration: 30, // Elegant speed
-            repeat: Infinity, 
-            ease: "linear" 
-          }}
-          className="flex whitespace-nowrap w-max"
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="flex w-max whitespace-nowrap"
         >
-          {/* RESTORED EXACT COLORS: Solid Pink Text, Solid Yellow Dots */}
-          <div className="flex items-center text-[15vw] font-display font-black leading-none tracking-tighter select-none">
+          <div className="flex items-center font-display text-[15vw] font-black leading-none tracking-tighter select-none">
             <span className="text-[#FF1F8B]">Jar of Punjab</span>
-            <span className="text-[#FFC107] px-2 md:px-8">·</span>
+            <span className="px-2 text-[#FFC107] md:px-8">·</span>
             <span className="text-[#FF1F8B]">Jar of Punjab</span>
-            <span className="text-[#FFC107] px-2 md:px-8">·</span>
+            <span className="px-2 text-[#FFC107] md:px-8">·</span>
           </div>
-          {/* Duplicate for seamless loop */}
-          <div className="flex items-center text-[15vw] font-display font-black leading-none tracking-tighter select-none">
+          <div className="flex items-center font-display text-[15vw] font-black leading-none tracking-tighter select-none">
             <span className="text-[#FF1F8B]">Jar of Punjab</span>
-            <span className="text-[#FFC107] px-2 md:px-8">·</span>
+            <span className="px-2 text-[#FFC107] md:px-8">·</span>
             <span className="text-[#FF1F8B]">Jar of Punjab</span>
-            <span className="text-[#FFC107] px-2 md:px-8">·</span>
+            <span className="px-2 text-[#FFC107] md:px-8">·</span>
           </div>
+        </motion.div>
+
+        {/* --- LAYER 2: White Flashlight Overlay --- */}
+        <motion.div 
+          className="absolute inset-0 pointer-events-none z-20 overflow-hidden"
+          style={{
+            WebkitMaskImage: marqueeMask,
+            maskImage: marqueeMask,
+            maskRepeat: "no-repeat",
+            maskSize: "100% 100%",
+          }}
+        >
+          {/* IMPORTANT: This inner div must be w-max and animate exactly like Layer 1 */}
+          <motion.div
+            animate={shouldReduceMotion ? {} : { x: ["0%", "-50%"] }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="flex w-max whitespace-nowrap"
+          >
+            <div className="flex items-center font-display text-[15vw] font-black leading-none tracking-tighter select-none">
+              <span className="text-white">Jar of Punjab</span>
+              <span className="px-2 text-white md:px-8">·</span>
+              <span className="text-white">Jar of Punjab</span>
+              <span className="px-2 text-white md:px-8">·</span>
+            </div>
+            <div className="flex items-center font-display text-[15vw] font-black leading-none tracking-tighter select-none">
+              <span className="text-white">Jar of Punjab</span>
+              <span className="px-2 text-white md:px-8">·</span>
+              <span className="text-white">Jar of Punjab</span>
+              <span className="px-2 text-white md:px-8">·</span>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </footer>

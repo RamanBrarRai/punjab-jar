@@ -4,6 +4,10 @@ import { CartProvider } from '@/components/cart-context'
 import { CartDrawer } from '@/components/site/cart-drawer'
 import { Navbar } from '@/components/site/navbar'
 import { Footer } from '@/components/site/footer'
+
+// 👇 1. IMPORT THE NEW COMPONENT
+import { CopyProtection } from '@/components/site/copy-protection'
+
 import './globals.css'
 
 export const dynamic = 'force-dynamic'
@@ -45,6 +49,9 @@ export default function RootLayout({
     <html lang="en" data-scroll-behavior="smooth" className={`${bricolage.variable} ${inter.variable} bg-background`}>
       <body className="antialiased">
         <CartProvider>
+          {/* 👇 2. ADD THE COMPONENT HERE */}
+          <CopyProtection /> 
+          
           <Navbar />
           <main>{children}</main>
           <Footer />
