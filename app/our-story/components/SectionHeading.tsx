@@ -10,7 +10,7 @@ export default function SectionHeading({ eyebrow, children }: { eyebrow?: string
           <p className="text-xs font-black uppercase tracking-widest text-black">{eyebrow}</p>
         </div>
       )}
-      <h2 className="font-sans text-4xl font-black leading-tight tracking-tight text-black md:text-5xl">
+      <h2 className="text-4xl font-black leading-tight tracking-tight text-black md:text-5xl">
         {children}
       </h2>
     </motion.div>

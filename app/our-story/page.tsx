@@ -8,18 +8,18 @@ import CtaSection from "./components/CtaSection";
 
 export default function OurStoryPage() {
   return (
-    <main className="min-h-screen overflow-x-hidden font-sans relative" style={{ backgroundColor: BRAND.cream, color: BRAND.ink }}>
+    <main className="min-h-screen overflow-x-hidden relative" style={{ backgroundColor: BRAND.cream, color: BRAND.ink }}>
       <HeroSection />
-      <CreativeDivider />
+      
       
       <OriginStorySection />
-      <CreativeDivider />
+      
       
       <FlavoursSection />
-      <CreativeDivider />
+      
       
       <FamilySection />
-      <CreativeDivider />
+      
       
       <CtaSection />
     </main>

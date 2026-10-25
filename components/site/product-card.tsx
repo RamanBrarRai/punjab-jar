@@ -6,6 +6,8 @@ import { Minus, Plus, ShoppingBag, Check } from 'lucide-react'
 import { useCart } from '@/components/cart-context'
 import { formatPrice, toneFor, toneStyles, type Pickle } from '@/lib/pickles'
 import { cn } from '@/lib/utils'
+import { DiscountBadge } from './discount-badge'
+import { PriceDisplay } from './price-display'
 
 export function ProductCard({ product }: { product: Pickle }) {
   const { add } = useCart()
@@ -49,19 +51,14 @@ export function ProductCard({ product }: { product: Pickle }) {
           </div>
         )}
         
-        {/* Badges Container */}
+        {/* Badges Container - Now using the common component */}
         <div className="absolute left-3 top-3 flex flex-col gap-2 items-start">
           {product.badge && (
             <span className="rotate-[-4deg] rounded-full border-2 border-ink bg-marigold px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-ink shadow-pop-sm">
               {product.badge}
             </span>
           )}
-          {/* NEW: Discount Badge */}
-          {product.discount && (
-            <span className="rotate-[2deg] rounded-full border-2 border-ink bg-pink px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-pop-sm">
-              {product.discount}% OFF
-            </span>
-          )}
+          <DiscountBadge discount={product.discount} className="rotate-[2deg]" />
         </div>
       </Link>
 
@@ -103,18 +100,13 @@ export function ProductCard({ product }: { product: Pickle }) {
         {/* Price + qty row */}
         <div className="mt-3 flex items-center justify-between gap-2">
           <div className="flex flex-col">
-            <div className="flex items-baseline gap-2">
-              {/* NEW: Show discounted price */}
-              <span className="font-display text-xl font-extrabold leading-none text-ink">
-                {formatPrice(lineTotal)}
-              </span>
-              {/* NEW: Show original crossed-out price */}
-              {variant.originalPrice && (
-                <span className="text-xs font-semibold text-ink/50 line-through">
-                  {formatPrice(variant.originalPrice * qty)}
-                </span>
-              )}
-            </div>
+            {/* Price Display - Now using the common component */}
+            <PriceDisplay 
+              price={lineTotal} 
+              originalPrice={variant.originalPrice ? variant.originalPrice * qty : undefined} 
+              size="md" 
+              layout="row"
+            />
             <span className="text-[10px] font-semibold text-ink/50 mt-0.5">
               {variant.size} · {qty} {qty === 1 ? 'jar' : 'jars'}
             </span>

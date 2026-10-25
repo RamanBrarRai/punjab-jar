@@ -43,32 +43,44 @@ export function Story() {
             eyebrow="Saadi kahani — Our Story"
             title={
               <>
-                It started with <span className="text-pink">Nani&apos;s</span> rooftop.
+                The Flavours 
+                <span className="text-pink"> We Grew Up With.</span>
               </>
             }
           />
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink/75">
             <p>
-              Every summer, our Nani lined the terrace in Mohali with jars of mango, lemon and chilli, turning them
-              each morning to catch the sun. The whole mohalla knew when her achaar was ready.
+              Jar of Punjab began with a love for the homemade flavours that remind
+              us of home. Across Punjab, we discovered wonderful recipes, cherished
+              traditions, and special flavours made in the kitchens of our Mom,
+              Nani, Dadi, and neighbourhood aunties.
             </p>
             <p>
-              We still use her hand-written recipes, her stone-ground masalas and her stubborn refusal to rush things.
-              We just made the volume louder — and the jars easier to ship.
+              Inspired by their love for homemade food, Raman and Prabh dreamed of
+              bringing these flavours together in one place — so every family could
+              enjoy a little taste of home, made with pyaar.
             </p>
           </div>
-
-          <dl className="mt-10 grid grid-cols-3 gap-4">
+          
+          <dl className="mt-10 grid grid-cols-3 gap-2 md:gap-4">
             {stats.map((s) => (
-              <div key={s.label} className="rounded-2xl border-2 border-ink bg-white p-4 text-center shadow-pop-sm">
+              <div
+                key={s.label}
+                className="flex min-w-0 flex-col items-center justify-center rounded-xl border border-ink/10 bg-white/80 p-3 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1 md:rounded-2xl md:p-4"
+              >
                 <dt className="sr-only">{s.label}</dt>
-                <dd>
-                  <span className="block font-display text-4xl font-extrabold text-pink md:text-5xl">{s.value}</span>
-                  <span className="mt-1 block text-xs font-bold uppercase tracking-wider text-ink/70">{s.label}</span>
+                <dd className="flex w-full flex-col items-center">
+                  <span className="block font-display text-3xl font-extrabold text-pink md:text-5xl">
+                    {s.value}
+                  </span>
+                  <span className="mt-1 block w-full break-words text-[9px] font-semibold uppercase tracking-wider text-ink/65 sm:text-[10px] md:text-xs">
+                    {s.label}
+                  </span>
                 </dd>
               </div>
             ))}
           </dl>
+
         </div>
       </div>
     </section>

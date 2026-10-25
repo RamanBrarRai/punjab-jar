@@ -3,19 +3,32 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { BRAND, family } from "../constants";
 import { fadeUp } from "../animations";
+// Import the star icon
+import { FaStar } from "react-icons/fa";
 
 export default function FamilySection() {
   return (
-    <section className="relative overflow-hidden px-4 py-20 md:py-28" style={{ backgroundColor: BRAND.cream, backgroundImage: "radial-gradient(#FF1F8B 1px, transparent 1px)", backgroundSize: "24px 24px", backgroundBlendMode: "multiply" }}>
+    <section 
+      className="relative overflow-hidden px-4 py-20 md:py-28" 
+      style={{ 
+        backgroundColor: BRAND.cream,
+        backgroundImage: `
+          radial-gradient(circle at 0% 0%, ${BRAND.pink}15 0%, transparent 40%),
+          radial-gradient(circle at 100% 100%, ${BRAND.yellow}25 0%, transparent 40%)
+        `
+      }}
+    >
       <div className="relative mx-auto max-w-6xl z-10 flex flex-col items-center">
         
         <div className="flex flex-col items-center text-center relative">
-          <div className="absolute -left-16 top-4 hidden md:block text-[#F4C430]">
-            <svg width="40" height="20" viewBox="0 0 40 20" fill="none"><path d="M0 10L15 5M10 0L15 5M10 20L15 5" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/></svg>
+          {/* REPLACED: Arrows are now soft floating sparkles */}
+          <div className="absolute -left-12 top-2 hidden md:block text-[#FFC107]">
+            <FaStar className="text-2xl animate-pulse" />
           </div>
-          <div className="absolute -right-16 top-4 hidden md:block text-[#F4C430]">
-            <svg width="40" height="20" viewBox="0 0 40 20" fill="none"><path d="M40 10L25 5M30 0L25 5M30 20L25 5" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/></svg>
+          <div className="absolute -right-12 top-2 hidden md:block text-[#FFC107]">
+            <FaStar className="text-2xl animate-pulse" />
           </div>
+          
           <div className="mb-4 inline-block rounded-full border-[2px] border-black bg-[#FFC107] px-4 py-1.5 shadow-[2px_2px_0px_0px_#000]">
             <p className="text-xs font-black uppercase tracking-widest text-black">Behind the Flavour</p>
           </div>
@@ -36,7 +49,7 @@ export default function FamilySection() {
                 </div>
               </div>
               <h3 className="text-xl font-semibold leading-snug">{member.name}</h3>
-              <p className="mt-1 text-sm font-bold uppercase tracking-wider text-[#C0392B]">{member.role}</p>
+              <p className="mt-1 text-sm font-bold uppercase tracking-wider text-[#dd9e0c]">{member.role}</p>
               <p className="mt-3 text-sm font-medium leading-relaxed mx-auto">{member.blurb}</p>
             </motion.div>
           ))}
@@ -47,7 +60,7 @@ export default function FamilySection() {
             <svg className="absolute inset-0 w-full h-full text-[#FDE68A] -z-10" preserveAspectRatio="none" viewBox="0 0 200 50" fill="currentColor">
               <path d="M5,25 C10,10 30,5 50,10 C80,0 120,15 150,5 C180,-5 195,15 195,25 C195,40 170,45 150,40 C120,55 80,40 50,45 C20,50 5,40 5,25 Z" />
             </svg>
-            <p className="text-lg md:text-xl italic font-semibold text-black">
+            <p className="text-lg italic font-semibold text-black">
               Four hearts. One family vision. A whole lot of Punjabi flavour. <span className="text-red-500 not-italic">❤️</span>
             </p>
           </motion.div>

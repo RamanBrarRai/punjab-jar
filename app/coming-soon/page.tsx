@@ -82,7 +82,7 @@ export default function ComingSoonPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mt-8 max-w-xl text-lg font-medium leading-relaxed text-[#444] md:text-xl"
+            className="mt-8 max-w-5xl text-lg font-medium leading-relaxed text-[#444] md:text-xl"
           >
             We&apos;re putting the final touches on our handmade jams and
             stone-ground spice powders — small-batch, made in Mohali, no

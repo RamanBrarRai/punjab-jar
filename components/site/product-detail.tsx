@@ -8,20 +8,28 @@ import { useCart } from '@/components/cart-context'
 import { formatPrice, toneFor, toneStyles, type Pickle } from '@/lib/pickles'
 import { cn } from '@/lib/utils'
 import { HeatMeter } from './heat-meter'
+import { DiscountBadge } from './discount-badge'
+import { PriceDisplay } from './price-display'
 
 export function ProductDetail({ product }: { product: Pickle }) {
   const { add } = useCart()
+  
   const defaultVariant =
     product.variants.find((v) => v.size === product.defaultSize) ??
     product.variants[0]
 
-  const [selectedSize, setSelectedSize] = useState(defaultVariant.size)
+  const [selectedSize, setSelectedSize] = useState(defaultVariant?.size || '')
   const [qty, setQty] = useState(1)
   const [added, setAdded] = useState(false)
 
   const variant =
     product.variants.find((v) => v.size === selectedSize) ?? product.variants[0]
+    
+  if (!variant) return <div className="p-20 text-center font-bold">Product data missing.</div>
+
   const lineTotal = variant.price * qty
+  const originalLineTotal = variant.originalPrice ? variant.originalPrice * qty : undefined
+  
   const tone = toneStyles[toneFor(product.id)]
   const isPreview = product.comingSoon === true
   const isImagePath = product.image.startsWith('/')
@@ -76,16 +84,21 @@ export function ProductDetail({ product }: { product: Pickle }) {
                 </div>
               )}
             </div>
-            {product.badge && !isPreview && (
-              <span className="absolute -right-2 -top-3 rotate-6 rounded-full border-2 border-ink bg-marigold px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-ink shadow-pop-sm">
-                {product.badge}
-              </span>
-            )}
-            {isPreview && (
-              <span className="absolute -right-2 -top-3 rotate-6 rounded-full border-2 border-ink bg-ink px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-cream shadow-pop-sm">
-                Coming soon
-              </span>
-            )}
+
+            {/* Badges */}
+            <div className="absolute -right-2 -top-3 flex flex-col items-end gap-2">
+              {product.badge && !isPreview && (
+                <span className="rotate-6 rounded-full border-2 border-ink bg-marigold px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-ink shadow-pop-sm">
+                  {product.badge}
+                </span>
+              )}
+              <DiscountBadge discount={product.discount} className="-rotate-3 px-4 py-1.5 text-sm" />
+              {isPreview && (
+                <span className="rotate-6 rounded-full border-2 border-ink bg-ink px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-cream shadow-pop-sm">
+                  Coming soon
+                </span>
+              )}
+            </div>
           </div>
 
           {/* DETAILS */}
@@ -135,7 +148,7 @@ export function ProductDetail({ product }: { product: Pickle }) {
               </p>
             )}
 
-            {/* Size pills */}
+            {/* Size pills - REDESIGNED */}
             <div className="mt-8">
               <p className="mb-3 text-xs font-bold uppercase tracking-wider text-ink/60">
                 Size
@@ -151,7 +164,7 @@ export function ProductDetail({ product }: { product: Pickle }) {
                       disabled={isPreview}
                       aria-pressed={active}
                       className={cn(
-                        'rounded-full border-2 border-ink px-5 py-2.5 font-display text-base font-bold transition-all',
+                        'flex min-w-[100px] flex-col items-center justify-center rounded-full border-2 border-ink px-5 py-3 transition-all',
                         isPreview
                           ? 'cursor-not-allowed bg-cream text-ink/40'
                           : active
@@ -159,16 +172,26 @@ export function ProductDetail({ product }: { product: Pickle }) {
                             : 'bg-cream text-ink hover:bg-marigold'
                       )}
                     >
-                      {v.size}
+                      <span className="font-display text-base font-bold leading-none">
+                        {v.size}
+                      </span>
+                      
                       {!isPreview && (
-                        <span
-                          className={cn(
-                            'ml-2 text-xs font-semibold',
-                            active ? 'text-cream/70' : 'text-ink/60'
+                        <div className="mt-1 flex items-center gap-1.5">
+                          <span className="text-xs font-bold">
+                            {formatPrice(v.price)}
+                          </span>
+                          {v.originalPrice && (
+                            <span
+                              className={cn(
+                                'text-[10px] font-semibold line-through',
+                                active ? 'text-cream/70' : 'text-ink/50'
+                              )}
+                            >
+                              {formatPrice(v.originalPrice)}
+                            </span>
                           )}
-                        >
-                          {formatPrice(v.price)}
-                        </span>
+                        </div>
                       )}
                     </button>
                   )
@@ -179,7 +202,7 @@ export function ProductDetail({ product }: { product: Pickle }) {
             {/* Qty + Price */}
             {!isPreview && (
               <div className="mt-8 border-t-2 border-dashed border-ink/25 pt-7">
-                <div className="flex flex-wrap items-center gap-6">
+                <div className="flex flex-wrap items-center justify-between gap-6">
                   <div>
                     <p className="mb-2 text-xs font-bold uppercase tracking-wider text-ink/60">
                       Quantity
@@ -207,13 +230,16 @@ export function ProductDetail({ product }: { product: Pickle }) {
                     </div>
                   </div>
 
-                  <div className="ml-auto text-right">
+                  <div className="flex flex-col items-end">
                     <p className="mb-2 text-xs font-bold uppercase tracking-wider text-ink/60">
                       Total
                     </p>
-                    <p className="font-display text-4xl font-extrabold leading-none text-ink">
-                      {formatPrice(lineTotal)}
-                    </p>
+                    <PriceDisplay 
+                      price={lineTotal} 
+                      originalPrice={originalLineTotal} 
+                      size="xl" 
+                      className="justify-end" 
+                    />
                     <p className="mt-1 text-xs font-semibold text-ink/50">
                       {variant.size} × {qty}
                     </p>

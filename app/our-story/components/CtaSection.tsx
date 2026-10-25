@@ -1,32 +1,75 @@
 "use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
-import { FiHeart } from "react-icons/fi";
-import { BRAND } from "../constants";
 import { fadeUp } from "../animations";
 
 export default function CtaSection() {
   return (
-    <section className="relative px-4 py-20 text-center md:py-28 overflow-hidden" style={{ backgroundColor: BRAND.cream }}>
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} className="mx-auto flex max-w-3xl flex-col items-center relative z-10">
-        <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-black bg-[#FFC107] shadow-[4px_4px_0px_0px_#000]">
-          <FiHeart size={32} color={BRAND.pink} fill={BRAND.pink} />
+    <section className="bg-cream px-3 py-16 md:px-6 md:py-24">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        variants={fadeUp}
+        className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border-2 border-ink bg-pink shadow-pop-lg"
+      >
+        {/* Phulkari Background Pattern */}
+        <div className="phulkari absolute inset-0" aria-hidden="true" />
+        
+        <div className="relative grid items-center gap-10 p-8 md:p-14 lg:grid-cols-[1.5fr_1fr]">
+          
+          {/* Left Column: Text Content */}
+          <div>
+            <p className="inline-block rotate-[-3deg] rounded-full border-2 border-ink bg-marigold px-4 py-1 text-xs font-bold uppercase tracking-[0.2em] text-ink">
+              From Our Family to Your Table.
+            </p>
+            
+            <h2 className="mt-6 text-[clamp(2.1rem,8vw,4.9rem)] font-extrabold leading-[0.9] tracking-tight text-white">
+              Good food carries
+              <br />
+              <span className="text-ink">memories & love.</span>
+            </h2>
+            
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/90">
+              Every Jar of Punjab product is part of our journey to celebrate the flavours we cherish and share something special with your family.
+            </p>
+            
+            <Link
+              href="/shop"
+              className="group mt-9 inline-flex h-14 items-center gap-3 rounded-full border-2 border-ink bg-marigold px-8 font-bold text-ink shadow-pop transition-all hover:-translate-y-0.5 hover:shadow-pop-lg"
+            >
+              Build My Box.
+              <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            </Link>
+          </div>
+
+          {/* Right Column: Image & Badge */}
+          <div className="relative mx-auto aspect-square w-full max-w-sm">
+            {/* Decorative offset circle */}
+            <div className="absolute inset-0 rotate-6 rounded-full border-2 border-ink bg-marigold" aria-hidden="true" />
+            
+            {/* Main Image Circle */}
+            <div className="relative size-full overflow-hidden rounded-full border-2 border-ink img-hover-zoom" data-reveal="zoom">
+              <Image
+                src="/images/hero-jar.png" // Using the Hero jar image for consistency
+                alt="A lineup of Jar Of Punjab achaar jars"
+                fill
+                sizes="(min-width: 1024px) 384px, 80vw"
+                className="object-cover img-zoom"
+              />
+            </div>
+            
+            {/* 15% OFF Badge */}
+            <span className="absolute -left-2 top-6 flex size-24 -rotate-12 animate-wiggle flex-col items-center justify-center rounded-full border-2 border-ink bg-emerald text-center font-display font-extrabold leading-none text-cream">
+              <span className="text-3xl">15%</span>
+              <span className="text-xs uppercase tracking-wider">off</span>
+            </span>
+          </div>
+
         </div>
-        <h2 className="text-4xl font-black leading-tight tracking-tight text-black md:text-5xl">From Our Family to Your Table.</h2>
-        <p className="mx-auto mt-6 max-w-xl text-lg font-medium leading-relaxed text-[#444]">
-          Good food carries memories, traditions and love. Every Jar of Punjab product is part of our journey to celebrate the flavours we cherish and share something special with your family.
-        </p>
-        <div className="mt-10">
-          <Link href="/products" className="group inline-flex items-center justify-center gap-3 rounded-full border-[4px] border-black bg-[#FFC107] px-10 py-5 text-xl font-black text-black shadow-[6px_6px_0px_0px_#000000] transition-all hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_#000000] active:translate-x-1 active:translate-y-1 active:shadow-none">
-            Build My Box.
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="h-7 w-7 transition-transform group-hover:translate-x-2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-            </svg>
-          </Link>
-        </div>
-        <p className="mt-16 text-3xl font-black tracking-wide text-black">
-          A Little Taste of <span style={{ color: BRAND.pink }}>Nani's</span> Kitchen.
-        </p>
       </motion.div>
     </section>
   );
